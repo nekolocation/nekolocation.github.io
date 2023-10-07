@@ -8,13 +8,15 @@ header {
     padding-top: 20px;
     padding-bottom: 20px;
     background: white;
-    /* PROBLEM 1: Make the header stick to the top as you scroll */
+    position: fixed
 
 }
 
 .content {
     width: 800px;
-    /* PROBLEM 2: Align the page content to the center of the screen */
+    
+    margin-left: auto;
+    margin-right: auto;
 
 }
 
@@ -41,7 +43,7 @@ header {
     float: left;
     overflow: hidden;
     margin-right: 40px;
-    /* PROBLEM 3: Give .image-card the appropriate position type */
+    position: relative
 
 }
 
@@ -56,23 +58,24 @@ header {
 .image-card-color-overlay {
     position: absolute;
     /* PROBLEM 4: Move the color overlay to cover the image properly */
-    top: 50px;
-    left: 200px;
+    top: 0px;
+    left: 0px;
     /* PROBLEM 5: What should the opacity be when there is no hover? */
-    opacity: 0.7;
+    opacity: 0.0;
     transition: 0.3s;
     background-color: navy;
 }
 
 .image-card:hover .image-card-color-overlay {
     /* PROBLEM 5: Pick an opacity for the blue hover effect */
-    opacity: 0.7;
+    opacity: 0.35;
 }
 
 .image-card-text {
     /* PROBLEM 6: Similar to .image-card-cover-overlay, position the card text */
-
-
+    position: absolute;
+    bottom: 15px;
+    left: 20px;
 
     color: white;
 }
@@ -80,22 +83,48 @@ header {
 
 /* PROBLEM 7: Improve the typography and colors of this page! */
 
-#title {
+/* The following is referenced from https://www.w3schools.com/css/css3_variables.asp */
+:root {
+    --title: #6A2784;
+    --txt: #382E93;
+  }
 
+#title {
+    font-family: 'Dela Gothic One', serif;
+    font-size: 20px;
 }
 
 h1 {
-
+    font-family: 'Hind Siliguri', serif;
+    font-size: 36px;
+    color: var(--title);
 }
 
 h2 {
-
+    font-family: serif;
+    font-style: italic;
+    font-size: 32px;
+    line-height: 0px;
+    margin-top: 0px;
+    margin-bottom: 50px;
+    color: var(--title);
 }
 
 h3 {
-
+    font-family: 'Dela Gothic One', serif;
+    font-size: 22px;
+    font-weight: bolder;
 }
 
 p {
+    font-family: 'Hind Siliguri', serif;
+    line-height: 30px;
+    font-size: 20px;
+    margin-top: 30px;
+    color: var(--txt);
+}
 
+.image-card-text {
+    font-family: 'Dela Gothic One', serif;
+    font-size: 18px;
 }
