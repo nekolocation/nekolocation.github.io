@@ -1,0 +1,206 @@
+:root {
+    --DarkRed:  #410000;
+    --EYellow:  #FFE44F;
+    --EGreen:   #548E19;
+    --ERed:     #E53701;
+    --DeepBlue: #082128;
+    --MidBlue:  #2f6575;
+    --WTxt:     #FFFFFF;
+    --OWYellow: #FFFADC;
+    --MenuHead: #410000;
+    --MenuItem: #000000;
+    --LogoHeight: 126px;
+    --NavbarHeight: 60px;
+    --NavbuttonWidth: 180px;
+  }
+
+html,body{
+    height:100%;
+    margin:0;
+}
+
+a { 
+    cursor: pointer;
+}
+
+#head-mosaic {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-image: url("../img/mosaic.png");
+    background-repeat: repeat-x;
+    background-size: contain;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+
+}
+
+.logo {
+    position: relative;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 375px;
+    height: var(--LogoHeight);
+
+    background-image: url('../img/Simple Logo.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+
+    font-size: 30px;
+    color: var(--DarkRed);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+}
+.logo .english , .logo .amharic {
+    display: flex;
+
+}
+.logo .english {
+    display: flex;
+    line-height: 30px;
+    font-family: 'Train One', serif;
+}
+.logo .amharic {
+    display: flex;
+    font-family: 'Abyssinica SIL', serif;
+}
+
+
+.order-box {
+    font-family: 'Noto Serif', serif;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: var(--LogoHeight);
+    position: absolute;
+    top: 30px;
+    right: 30px;
+
+    color: var(--WTxt);
+
+    align-items: center;
+    justify-content: space-around;
+}
+.order-box .order-online-button {
+    display: flex;
+    width: 315px;
+    height: 66px;
+
+    background-image: linear-gradient(to bottom, #E53701, #5E1600);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 48px;
+    border-style: solid;
+    border-color: #fff;
+    border-width: 2px;
+    box-shadow: 10px 5px 15px var(--DarkRed);
+
+    font-size: 36px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.order-box .order-online-button .order-text {
+    margin: 0;
+    color: var(--WTxt);
+    text-decoration: none;
+    transition: 0.5s;
+}
+.order-box .order-online-button .order-text:hover {
+    text-shadow: 5px 5px 5px var(--DarkRed);
+    font-size: 38px;
+    transition: 0.5s;
+}
+.order-box .call-button {
+    display: flex;
+    width: 180px;
+    height: 35px;
+
+    background-image: linear-gradient(to bottom, #11586B , #082128, #082128);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 43px;
+    box-shadow: 10px 5px 15px var(--DarkRed);
+
+
+    color: var(--WTxt);
+
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.order-box .call-button .call-text {
+    font-size: 20px;
+    color: var(--WTxt);
+    text-decoration: none;
+    transition: 0.5s;
+}
+.order-box .call-button .call-text:hover {
+    text-shadow: 7px 2px 2px var(--DarkRed);
+    font-size: 22px;
+    transition: 0.5s;
+}
+
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+
+    font-size: 47px;
+    opacity: 1;
+    color: var(--WTxt);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.navbar .nav-button {
+    position: relative;
+    display: flex;
+    
+    width: var(--NavbuttonWidth);
+    height: var(--NavbarHeight);
+
+    font-size: 25px;
+    font-family: 'Radio Canada', serif;
+
+    overflow: hidden;
+    color: var(--WTxt);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.nav-link {
+    text-decoration: none;
+    color: var(--WTxt);
+    transition: 0.3s;
+}
+.nav-link:hover {
+    font-size: 29px;
+    transition: 0.3s;
+}
+.nav-button:hover {
+    box-shadow: inset 0px -10px 0px -2px var(--MidBlue);
+    font-size: 28px;
+    transition: 0.3s;
+}
+
+.opaque-bar {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: var(--NavbarHeight);
+
+    overflow: hidden;
+    opacity: 0.87;
+    background-color: var(--DeepBlue);
+}
