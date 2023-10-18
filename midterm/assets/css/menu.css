@@ -13,7 +13,7 @@
   }
 
 .nav-button:nth-child(2) {
-    box-shadow: inset 0px -10px 0px -2px var(--WTxt);
+    box-shadow: inset 0px -8px 0px -2px var(--WTxt);
 }
 
 
@@ -21,44 +21,34 @@
     position: relative;
     padding-top: 50px;
     padding-bottom: 50px;
+
     margin-left: auto;
     margin-right: auto;
 
     top: 0;
     display: flex;
     width: 100%;
-    height: 100%;
+    height: fit-content;
+
     align-items: start;
     justify-content: center;
-    
 }
-#page-content {
+
+
+
+
+#menu-container {
     position: relative;
     display: flex;
-    flex-direction: row;
-    flex: 2 1 auto;
-    top: 0;
-    position: center;
-    width: 50%;
+    flex-direction: column;
+    width: 80%;
     height: 100%;
 
-    align-items: center;
-    justify-content: center;
-}
-
-
-
-#page-content #menu-container {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    width: 87.5%;
-    margin-left: 6.25%;
+    margin-left: 10%;
     margin-right: auto;
     top: 0px;
     left: 0px;
 
-    background-image: url('../img/mosaic.png');
     background-repeat: repeat;
     background-size: 50%;
 
@@ -70,11 +60,19 @@
 }
 #category {
     position: relative;
-    height: 100%;
+
     width: 100%;
+    height: fit-content;
+
+    padding-bottom: 25px;
 }
 
+
+
 .section-head {
+    background-image: url('../img/mosaic.png');
+    background-size: 33%;
+    background-attachment: fixed;
     position: relative;
     height: 58px;
     width: 100%;
@@ -89,7 +87,7 @@
     width: 100%;
 
     background-color: var(--DarkRed);
-    opacity: 0.75;
+    opacity: 0.90;
     overflow: hidden;
 }
 .section-header-text {
@@ -147,5 +145,10 @@
     display: flex;
     position: absolute;
     right:0;
-    margin-right: 15px;
+    margin-right: 25px;
+}
+
+
+#bottom-bar {
+    height: 50px;
 }
