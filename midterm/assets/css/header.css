@@ -14,14 +14,20 @@
     --NavbuttonWidth: 180px;
   }
 
-html,body{
+  html,body{
     height:100%;
     margin:0;
+}
+html {
+    background-image: url("../img/home/background_tile.png");
+    background-repeat: repeat;
+    background-size: cover;
 }
 
 a { 
     cursor: pointer;
 }
+
 
 #head-mosaic {
     position: relative;
