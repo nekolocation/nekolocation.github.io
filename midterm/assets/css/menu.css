@@ -139,7 +139,6 @@
 }
 #body-cell .item-name {
     width: 75%;
-    color: var(--DarkRed);
 }
 #body-cell .item-price {
     display: flex;
