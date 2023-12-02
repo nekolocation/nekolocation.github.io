@@ -1,0 +1,72 @@
+:root {
+    --MidBrown:      #986B41;
+    --DarkBrown:    #56342A;
+    --White:rgb(247, 236, 222);
+    --OffWhite: rgb(228, 202, 167);
+
+  }
+
+#back-arrow {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+
+    height: 80px;
+
+    transform: rotate(0deg);
+    transition: 2s;
+}
+#back-arrow:hover {
+    animation-name: rotate-Back;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+h1 {
+    font-family: Della Respira, serif;
+    text-align: center;
+    font-size: 42px;
+}
+
+  #body-container {
+    margin-left: 140px;
+    margin-right: 140px;
+
+    display: flex;
+    flex-direction: column;
+
+
+    justify-content: center;
+}
+
+#abt-container {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 4;
+
+    margin-bottom: 40px;
+}
+#portrait-frame {
+    height: 100%;
+    background-image: url("../img/about/portrait_frame.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+#abt-img {
+    margin: 20px;
+}
+#abt-text {
+    margin-left: 60px;
+    font-size: 25px;
+    font-family: Georgia, serif;
+}
+
+
+@keyframes rotate-Back {
+    0% {  transform: rotate(0deg);}
+    25%{  transform: rotate(5deg);}
+    50%{  transform: rotate(0deg);}
+    75%{ transform: rotate(-5deg);}
+    100%{ transform: rotate(0deg);}
+}

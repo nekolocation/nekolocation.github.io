@@ -65,7 +65,15 @@ audio::-webkit-media-controls-panel {
     font-size: 70px;
     justify-content: center;
     align-items: center;
+
+    transition: 0.66s;
 }
+#brand-name:hover {
+    letter-spacing: 19px;
+    
+    transition: 6s;
+}
+
 #decor {
     display: flex;
     height: 100%;
@@ -110,4 +118,60 @@ audio::-webkit-media-controls-panel {
 
     margin-top: 10px;
     /* background-color: aqua; */
+}
+
+
+#squirrel {
+    display: flex;
+    flex-direction: row;
+    width: 100px;
+    position: fixed;
+    left: -200px;
+}
+
+#sqr-img1 {
+    animation-name: sqRun-Right;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    animation-delay: 0s;
+}
+#sqr-img2 {
+    animation-name: sqRun-Left;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    animation-delay: 10s;
+}
+
+@keyframes sqRun-Right {
+    0% {  transform: translate(-200px, 0);}
+    25%{  transform: translate(-200px, 0);}
+    50%{  transform: translate( 120vw, 0);}
+    100%{ transform: translate( 120vw, 0);}
+}
+@keyframes sqRun-Left {
+    0% {  transform: translate( 120vw, 0);} 
+    25% {  transform: translate( 120vw, 0);} 
+    50%{  transform: translate(-200px, 0);}
+    100%{ transform: translate(-200px, 0);}
+}
+
+#address {
+    display: flex;
+    position: absolute;
+    bottom: 12px;
+
+    width: 33vw;
+    left: 33%;
+    right: 33%;
+
+    font-family: Karla, serif;
+
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
 }

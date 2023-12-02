@@ -7,6 +7,22 @@
   }
 
 
+  #forward-arrow {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+
+    height: 80px;
+
+    transform: rotate(0deg);
+    transition: 2s;
+}
+#forward-arrow:hover {
+    animation-name: rotate-Front;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
 
   #body-container {
     margin-left: 60px;
@@ -32,7 +48,7 @@
     background-image: url("../img/home/chalkboard.jpg");
     background-size: cover;
 
-    margin: 25px;
+    margin: 30px;
     /* border: 15px;
     border-style: outset;
     border-color: var(--MidBrown); */
@@ -81,8 +97,17 @@ h3 {
     margin-right: 20px;
     margin-left: 10px;
 
-    background-image: url("../img/home/fluorish_squirrel.png");
+    background-image: url("../img/home/chalk_art.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+
+@keyframes rotate-Front{
+    0% {  transform: rotate(0deg);}
+    25%{  transform: rotate(5deg);}
+    50%{  transform: rotate(0deg);}
+    75%{ transform: rotate(-5deg);}
+    100%{ transform: rotate(0deg);}
 }
