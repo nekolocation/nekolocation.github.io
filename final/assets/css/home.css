@@ -49,14 +49,16 @@
     background-size: cover;
 
     margin: 30px;
-    /* border: 15px;
-    border-style: outset;
-    border-color: var(--MidBrown); */
+    /* padding-bottom: 30px; */
+    color: white;
 }
 
 #chalk-sections {
     display: flex;
     flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
 }
 
 #menu-header {
@@ -97,7 +99,7 @@ h3 {
     margin-right: 20px;
     margin-left: 10px;
 
-    background-image: url("../img/home/chalk_art.png");
+    background-image: url("../img/home/chalkboard_art_new.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

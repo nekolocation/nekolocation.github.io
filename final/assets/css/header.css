@@ -20,13 +20,44 @@ html {
     color: white;
 }
 
+.hueShift{
+    filter: hue-rotate(140deg);
+}
+
+#toggleButton {
+    position: absolute;
+    bottom: 20px;
+    left: 30px; 
+
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+    background-image: url("../img/eye_light.png");
+    background-size: 100% 100%;
+    color: rgba(0, 0, 0, 0);
+}
+#toggleButton:hover {
+    cursor: pointer;
+}
+.toggleBG {
+    background-image: url("../img/eye_dark.png");
+}
+
+.light-mode-bg {
+    color: black;
+    background-image: url("../img/foliage.jpg");
+    background-repeat: repeat; 
+    background-size: 10%;
+  }
+
 a { 
     cursor: pointer;
 }
 
-a#no-styling {
+#no-styling {
     cursor: pointer;
     color: white;
+    text-shadow: 1px 1px 2px rgb(0, 6, 63), 2px 2px 2px rgb(10, 10, 85), 1px 1px 3px rgb(68, 68, 184);
     text-decoration: none;
 }
 
