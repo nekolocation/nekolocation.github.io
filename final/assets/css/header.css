@@ -148,7 +148,6 @@ audio::-webkit-media-controls-panel {
     width: 100%;
 
     margin-top: 10px;
-    /* background-color: aqua; */
 }
 
 
@@ -158,6 +157,9 @@ audio::-webkit-media-controls-panel {
     width: 100px;
     position: fixed;
     left: -200px;
+}
+#squirrel:hover {
+    cursor: pointer;
 }
 
 #sqr-img1 {
