@@ -1,0 +1,201 @@
+:root {
+    --DarkRed:  #410000;
+    --EYellow:  #FFE44F;
+    --EGreen:   #548E19;
+    --ERed:     #E53701;
+    --DeepBlue: #082128;
+    --WTxt:     #FFFFFF;
+    --OWYellow: #FFFADC;
+    --MenuHead: #410000;
+    --MenuItem: #000000;
+  }
+
+.nav-button:nth-child(1) {
+    box-shadow: inset 0px -8px 0px -2px var(--WTxt);
+}
+
+
+
+#content-container {
+    position: relative;
+    padding-top: 50px;
+    top: 0;
+    display: flex;
+    width: 100%;
+}
+#page-content {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex: 2 1 auto;
+    top: 0;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+
+    height: 700px;
+    align-items: center;
+    justify-content: center;
+}
+#page-content #left {
+    position: absolute;
+    display: flex;
+    margin-left: 90px;
+    width: 60%;
+    flex-direction: column;
+    top: 0px;
+    left: 0px;
+}
+#page-content #right {
+    position: absolute;
+    display: flex;
+    margin-right: 50px;
+    width: 27%;
+    height: 100%;
+    flex-direction: column;
+    top: 0px;
+    right: 0px;
+}
+
+.welcome-box {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-image: url("../img/home/interior_transparent.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: var(--DeepBlue);
+    background-color: var(--OWYellow);
+    border-color: var(--OWYellow);
+    border-style: solid;
+    border-width: 7px;
+
+}
+h1 {
+    margin-left: 14px;
+    line-height: 30px;
+    -webkit-text-stroke-width: 0.2mm;
+    font-family: 'Playfair Display', serif;
+    font-weight: bolder;
+    font-size: 40px;
+}
+p {
+    margin-left: 14px;
+    margin-bottom: 25px;
+    letter-spacing: 3px;
+    -webkit-text-stroke-width: 0px;
+    font-family: 'Noto Serif', serif;
+    font-weight: thin;
+    font-size: 27px;
+}
+
+.location {
+    display: flex;
+    position: relative;
+    margin-top: 50px;
+    height: fit-content;
+
+    color: var(--DarkRed);
+
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    font-family: 'Noto Serif', serif;
+    font-size: 22px;
+    font-weight: lighter;
+}
+.location-text {
+    margin-right: 30px;
+}
+.location-map {
+    display: block;
+    height: fit-content;
+    /*border-color: var(--OWYellow);
+    border-width: 6px;
+    border-style: double;*/
+
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+.food-photos {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+.food-photos #top {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+
+    height: 50%;
+    width: 100%;
+}
+.food-photos #bottom {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+
+    height: 50%;
+    width: 100%;
+}
+#food-1 {
+    display: flex;
+    position: absolute;
+    
+    background-image: url("../img/home/food/dish1.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    width: 50%;
+    height: 100%;
+}
+#food-2 {
+    display: flex;
+    position: absolute;
+    right: 0px;
+    
+    background-image: url("../img/home/food/dish2.png");
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    width: 50%;
+    height: 100%;
+}
+#food-3 {
+    display: flex;
+    position: absolute;
+    left: 0px;
+    
+    background-image: url("../img/home/food/dish3.png");
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    height: 100%;
+    width: 50%;
+}
+#food-4 {
+    display: flex;
+    position: absolute;
+    right: 0px;
+
+    background-image: url("../img/home/food/dish4.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    
+    height: 100%;
+    width: 50%;
+}
