@@ -1,0 +1,322 @@
+<html>
+	<head>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+		<style>
+			h1 {
+				text-align: center;
+			}
+			h2 {
+				margin-top: 40px;
+			}
+
+			.container {
+				margin: 0 auto;
+				margin-left: 200px;
+				margin-right: 200px;
+				margin-top: 50px;
+				margin-bottom: 80px;
+			}
+
+			figure {
+				text-align: center;
+			}
+
+			img {
+				display: inline-block;
+			}
+
+			body {
+				font-family: 'Inter', sans-serif;
+				font-size: 16px;
+				line-height: 30px;
+			}
+			p {
+				margin: 0px;
+			}
+
+			.section {
+				display: flex;
+				flex-direction: column;
+				/* align-items: center; */
+			}
+			.figure {
+				display: flex;
+				align-self: center;
+				width: 50%;
+			}
+			.figtext, figcaption {
+				align-self: center;
+				font-style: italic;
+			}
+			#task2-row {
+				display: flex;
+				max-width: 100%;
+				justify-content: center;
+				flex-grow: 1;	
+				/* justify-content: space-evenly; */
+			}
+			#img-by-txt {
+				display: flex;
+				justify-content: center;
+				margin-top: 20px;
+				margin-bottom: 20px;
+			}
+
+			td {
+				padding: 10px;
+			}
+			/* tr td:nth-child(1) {
+				border-width: 0px;
+				border-right: 3px;
+				border-color: grey;
+				border-style: solid;
+			} */
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Triangle Rasterization Write-Up</h1>
+			<h1 style="font-size: 20px;">CS184/284A Spring 2025</h1>
+			<div style="text-align: center;">By <a href="https://github.com/nekolocation" target=”_blank”>Edward Gilmore</a> and <a href="https://github.com/jovinV" target=”_blank”>Jovin Valdez</a> </div>
+
+			<br>
+
+			<!-- Link to webpage: <a href="https://nekolocation.github.io/portfolio/rasterization">https://nekolocation.github.io/portfolio/rasterization</a> -->
+
+			<br>
+
+			<!-- Private repository: <a href="https://github.com/cal-cs184-student/sp25-hw1-waking-amongkies">https://github.com/cal-cs184-student/sp25-hw1-waking-amongkies</a> -->
+
+			<figure>
+				<img src="./images/cowboycat.png" alt="meowdy" style="width:80%" />
+				<figcaption>we wrasslin jaggie-varmints</figcaption>
+			</figure>
+
+			<!--
+	We've already added one heading per task, to make your write-up as navigable when grading. Please fit your write-up within these sections!
+	-->
+
+			<div class="section">
+				<h2>Overview</h2>
+				Give a high-level overview of what you implemented in this homework. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the homework.
+			</div>
+			
+			<div class="section">
+				<h2>Task 1: Drawing Single-Color Triangles</h2>
+				<p>
+					Our triangle rasterization begins by analyzing the vertices of a given triangle: we find the minimum and maximum values for both X and Y between the three points of the triangle. Using those four values, we construct a bounding rectangle around the triangle. We then iteratively look through each point in the rectangle to see whether it’s located inside of the triangle, using the point-in-triangle test provided in lecture:
+	
+					\[L_i(x,y)=–(x-X_i) dY_i+(y-Y_i)dX_i=A_ix+B_iy+C_i\]
+		
+					This involves checking whether each point lies inside an edge \((L_i)\) for all three edges \((L_{0, 1, 2})\) of the triangle. Solving for \(L\) tells us whether a given point lies inside or outside of the triangle— though this determination depends on whether the vertices are checked in clockwise or counter-clockwise order. That is to say, for a point inside of the triangle, \(Li(x,y)≥0\) for clockwise rotation and \(Li(x,y)≤0\) for counter-clockwise rotation.  Thus the runtime of our algorithm is that of checking each sample within the bounding box of the triangle.
+		
+				</p>
+				<br />
+				<img src="./images/task1_triangle_render.png" class="figure" alt="Rasterized triangles image" />
+				<p class="figtext">Triangle rasterization, with highlighted jaggies</p>
+				<br />
+				<p>
+					With that implementation, we were able to rasterize SVG files, accurately filling in the triangles but producing noticeable jaggies.				
+				</p>
+			</div>
+
+			<div class="section">
+				<h2>Task 2: Antialiasing by Supersampling</h2>
+				<p>
+					Supersampling creates a higher-definition rendering of an image  that can be down-sampled. The process of down-sampling creates averaged values for each pixel. This is useful because when pixels fall on the edge of a triangle, jaggies can be formed, or thin parts of a triangle can disappear. Therefore, supersampling can be used to create a clearer image of a rendered shape.
+				</p>
+				<br />
+				<p>
+					In order to implement supersampling for our triangle rendering, we use the sample_buffer array to hold the color values of every subpixel. To fill the sample_buffer, for every pixel we use sample_rate to calculate the amount of the subpixel regions within that pixel. For each of these subpixels, we determine whether they are inside the triangle using the same point in triangle method as in task 1, and update the relevant sample_buffer index accordingly. Once all of the subpixel values have been determined, for each individual pixel we get the average value between all its subpixels, then submit that averaged value to the framebuffer. This accomplishes the goal of anti-aliasing by smoothing edges and obliterating jaggies, enhancing image quality.
+				</p>
+				<br />
+				<p>
+					This process requires a change to different parts of the rasterization pipeline; specifically, we now use a sample_buffer (which is a vector data structure) instead of filling pixels as we sample, and we convert that internal rasterizer buffer to the screenbuffer through value averaging.
+				</p>
+	
+				<br />
+				<p>
+					Below, the output of basic/test4.svg is shown with increasingly high sample rates:
+				</p>
+	
+				<br />
+				<div id="task2-row">
+					<img src="./images/task_2_sample_1.png" alt="Rasterized triangles rate 1 image" style="max-width: 30vw;"/>
+					<img src="./images/task_2_sample_4.png" alt="Rasterized triangles rate 4 image" style="max-width: 30vw;"/>
+					<img src="./images/task_2_sample_16.png" alt="Rasterized triangles rate 16 image" style="max-width: 30vw;"/>
+				</div>
+				<p class="figtext">Sample rates from left to right — 1, 4, 16</p>
+				<br />
+				<p>
+					With higher sample rates we get more information for every pixel in the framebuffer (since there are more subpixels for higher rates). Thus higher sampling rates result in a smoother looking edge since we filter out higher frequencies and retain more subpixel info than we could with lower sampling rates.
+				</p>
+			</div>
+
+			<div class="section">
+				<h2>Task 3: Transforms</h2>
+				<p>
+					Our next task was to implement the ability for our SVG renderer to transform images via scaling, translation, and rotation. In doing this, we were able to morph ten square objects to represent a box-shaped guy.
+				</p>
+				<br \>
+				<p>
+					We further manipulated the cubeman, testing the abilities of our shape manipulation (and just having fun with it). In doing this, we drew inspiration from the design of exit signs, paying homage to the running man often featured on them. We made the box man green and manipulated his arms and legs to appear as if he’s running, tilting the torso and head to further sell the effect. 
+				</p>
+				<img src="./images/task3_runman.png" class="figure" alt="Running man image" />
+				<p class="figtext">Running man</p>
+				<br />
+				<p>We also made another one.</p>
+				<img src="./images/task3_pissguy.png" class="figure" alt="Pissman image" />
+				<p class="figtext">Bros gotta piss</p>
+			</div>
+
+			<div class="section">
+				<h2>Task 4: Barycentric coordinates</h2>
+				<p>
+					Barycentric coordinates are a system by which the location of a given point can be defined relative to other points. Given points A and B, a barycentric coordinate of \((\frac{A}{2}, \frac{B}{2})\) or \((0.5, 0.5)\) would define a location at the midpoint between the two.
+				</p>
+				<br/>
+				<p>
+					For example, a point within a triangle could be defined by its vertices. Take the following triangle :
+				</p>
+				<div id="img-by-txt">
+					<img src="./images/task_4_triangle.png" alt="Cyan-colored triangle" height="200px"/>
+					<p>
+						In the given image, define the vertices, starting top left and going clockwise, as \(V_A, V_B, V_C\). In a barycentric coordinate system of \((V_A, V_B, V_C)\), the point  \((\frac{1}{3}, \frac{1}{3}, \frac{1}{3})\)  would define the midpoint of the triangle,  the point (1, 0, 0)  would lie atop the point \(V_A\), and \((\frac{1}{5}, \frac{1}{5}, \frac{3}{5})\)  would be closer to \(V_C\) and further from \(V_A\) and \(V_B\). 
+					</p>
+				</div>
+				<p>
+					This idea can be applied to the triangle to color it, seen below:
+				</p>
+				<img src="./images/task_4_gradient_triangle.png" class="figure" alt="Gradient triangle" />
+				<p class="figtext">Barycentric-coloring of a triangle</p>
+				<br />
+				<p>
+					In the above image, vertice \(V_A\) has been kept as cyan, \(V_B\) has been colored magenta, and \(V_C\) has been colored green. The points within the triangle then use barycentric coordinates to color in each point so that a point closer to \(V_A\) will be more cyan-colored, a point closer to \(V_B\) will be more magenta-colored, etc. The outcome of this, as seen above, is a color gradient, visually representing the barycentric weights at each point of the shape. 
+				</p>
+				<br/>
+				<p>
+					This concept can be extended to create a color wheel:
+				</p>
+				<br/>
+				<img src="./images/task_4_color_wheel.png" class="figure" alt="Color wheel image" />
+				<p class="figtext">Barycentric color wheel</p>
+			</div>
+
+			<div class="section">
+				<h2>Task 5: "Pixel sampling" for texture mapping</h2>
+				<p>
+					Pixel sampling is how we choose a certain color value from a texture for a point on a surface. We implemented it by calculating a texture coordinate and then sample the texture at that coordinate to get a color. In order to map textures onto surfaces, we implemented two triangle texture mapping methods: nearest-pixel and bilinear sampling. 
+				</p>
+				<br/>
+				<p>
+					Nearest-pixel sampling involves converting the uv coordinate within the rasterization to a corresponding point in the texture space, rounding to the nearest texel. We then use this texel’s color as the final color for that point. Alternatively, with bilinear sampling we look at the surrounding four texels around the uv coordinate (unless the coordinate is centered to a texel), doing linear interpolation horizontally and vertically. This gives us four values between those texels that we average to be used as the final color. 
+				</p>
+				<br/>
+				<p>
+					These different sampling methods are displayed below, at different sampling rates:
+				</p>
+				<br/>
+				<div style="display: flex; flex-direction: column; align-items: center;">
+					<table style="width: 100%; text-align: center; border-collapse: collapse;">
+						<tr>
+							<td style="text-align: center;">
+								<img src="images/ss_nearest1.png" width="400px" />
+								<figcaption>Nearest-pixel sampling — 1 sample per pixel</figcaption>
+							</td>
+							<td style="text-align: center;">
+								<img src="images/ss_nearest16.png" width="400px" />
+								<figcaption>Nearest-pixel sampling — 16 samples per pixel</figcaption>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">
+								<img src="images/ss_bilinear1.png" width="400px" />
+								<figcaption>Bilinear sampling — 1 sample per pixel</figcaption>
+							</td>
+							<td style="text-align: center;">
+								<img src="images/ss_bilinear16.png" width="400px" />
+								<figcaption>Bilinear sampling — 16 samples per pixel</figcaption>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<br/>
+				<p>
+					There appears to be noticeably more smoothness with bilinear sampling than nearest, mostly in areas where there is high frequency and contrast in colors. This is due to the fact that the bilinear method interpolates between multiple texels versus simply getting the closest texel with nearest-pixel; averaging color values via bilinear sampling produces a more smoothly distributed change in colors, in contrast to nearest-pixel which typically results in a more blocky-looking texture. 
+				</p>
+			</div>
+
+			<div class="section">
+				<h2>Task 6: "Level Sampling" with mipmaps for texture mapping</h2>
+				<p>
+					Level sampling is a graphics rendering process that uses mipmap levels to smooth color variations between pixels and reduce sharp image effects like jaggies. It involves selecting particular levels when applying textures to surfaces. Surfaces further away use lower resolution textures (higher level mipmaps), while closer surfaces use higher resolutions. This results in reduced aliasing and smoother appearances. We implemented it by calculating how much texture coordinates change per pixel using uv coordinate derivatives to calculate the mipmap level. 
+				</p>
+				<br/>
+				<p>
+					With pixel sampling, different approaches have different trade-offs. Nearest-pixel sampling is faster but can appear more pixelated, while bilinear performs anti-aliasing better but is more costly. In terms of level sampling, a fixed level (i.e.: mipmap level 0) is fast but may have aliasing, while trilinear filtering has more smooth results but requires more memory and power. This tradeoff exists because a higher number of samples-per-pixel improves antialiasing but also requires more power and memory usage. 
+				</p>
+				<br/>
+				<p>
+					To demonstrate the visual efficacy of these methods, we used an image with noise to see how a warped mesh would display the information and smooth out the noise:
+				</p>
+				<br/>
+				<div style="display: flex; flex-direction: column; align-items: center;">
+					<table style="width: 100%; text-align: center; border-collapse: collapse;">
+						<tr id="top">
+							<td class="left" style="text-align: center;">
+								<img src="images/ss_levelzero_pnearest.png" width="400px" />
+								<figcaption>Zero level-sample, nearest pixel sample</figcaption>
+							</td>
+							<td style="text-align: center;">
+								<img src="images/ss_levelzero_plinear.png" width="400px" />
+								<figcaption>Zero level-sample, bilinear pixel sample</figcaption>
+							</td>
+						</tr>
+						<tr>
+							<td class="left" style="text-align: center;">
+								<img src="images/ss_levelnearest_pnearest.png" width="400px" />
+								<figcaption>Nearest level-sample, nearest pixel sample</figcaption>
+							</td>
+							<td style="text-align: center;">
+								<img src="images/ss_levelnearest_plinear.png" width="400px" />
+								<figcaption>Nearest level-sample, bilinear pixel sample</figcaption>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<br/>
+				<p>
+					As seen above, the addition of level sampling greatly helps reduce the noise in the image, while bilinear pixel sampling further helps reduce the noise and smooth out the edges of shapes at a given level. Zero level-sampling with nearest pixel-sampling produces the noisiest and roughest image, while subsequent images increasingly smooth out and better define the shape of the supplied texture. However, while the bottom-right image best represents the shape of the texture map, the outcome looks blurrier than other results, leading to a trade off between finer image definition and representation of the texture. 
+
+				</p>
+			</div>
+
+	<!-- <p>Here is an example 2x2 gridlike structure using an HTML table. Each <b>tr</b> is a row and each <b>td</b> is a column in that row. You might find this useful for framing and showing your result images in an organized fashion.</p>-->
+			<!-- <div style="display: flex; flex-direction: column; align-items: center;">
+		<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			<tr>
+				<td style="text-align: center;">
+					<img src="images/image1.png" width="400px" />
+					<figcaption>Caption goes here.</figcaption>
+				</td>
+				<td style="text-align: center;">
+					<img src="images/image2.png" width="400px" />
+					<figcaption>Caption goes here.</figcaption>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align: center;">
+					<img src="images/image3.png" width="400px" />
+					<figcaption>Caption goes here.</figcaption>
+				</td>
+				<td style="text-align: center;">
+					<img src="images/image4.png" width="400px" />
+					<figcaption>Caption goes here.</figcaption>
+				</td>
+			</tr>
+		</table>
+	</div> -->
+		</div>
+	</body>
+</html>
