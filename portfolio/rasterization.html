@@ -89,7 +89,7 @@
 			<!-- Private repository: <a href="https://github.com/cal-cs184-student/sp25-hw1-waking-amongkies">https://github.com/cal-cs184-student/sp25-hw1-waking-amongkies</a> -->
 
 			<figure>
-				<img src="./images/cowboycat.png" alt="meowdy" style="width:80%" />
+				<img src="./assets/img/rasterization/cowboycat.png" alt="meowdy" style="width:80%" />
 				<figcaption>we wrasslin jaggie-varmints</figcaption>
 			</figure>
 
@@ -113,7 +113,7 @@
 		
 				</p>
 				<br />
-				<img src="./images/task1_triangle_render.png" class="figure" alt="Rasterized triangles image" />
+				<img src="./assets/img/rasterization/task1_triangle_render.png" class="figure" alt="Rasterized triangles image" />
 				<p class="figtext">Triangle rasterization, with highlighted jaggies</p>
 				<br />
 				<p>
@@ -142,9 +142,9 @@
 	
 				<br />
 				<div id="task2-row">
-					<img src="./images/task_2_sample_1.png" alt="Rasterized triangles rate 1 image" style="max-width: 30vw;"/>
-					<img src="./images/task_2_sample_4.png" alt="Rasterized triangles rate 4 image" style="max-width: 30vw;"/>
-					<img src="./images/task_2_sample_16.png" alt="Rasterized triangles rate 16 image" style="max-width: 30vw;"/>
+					<img src="./assets/img/rasterization/task_2_sample_1.png" alt="Rasterized triangles rate 1 image" style="max-width: 30vw;"/>
+					<img src="./assets/img/rasterization/task_2_sample_4.png" alt="Rasterized triangles rate 4 image" style="max-width: 30vw;"/>
+					<img src="./assets/img/rasterization/task_2_sample_16.png" alt="Rasterized triangles rate 16 image" style="max-width: 30vw;"/>
 				</div>
 				<p class="figtext">Sample rates from left to right — 1, 4, 16</p>
 				<br />
@@ -162,11 +162,11 @@
 				<p>
 					We further manipulated the cubeman, testing the abilities of our shape manipulation (and just having fun with it). In doing this, we drew inspiration from the design of exit signs, paying homage to the running man often featured on them. We made the box man green and manipulated his arms and legs to appear as if he’s running, tilting the torso and head to further sell the effect. 
 				</p>
-				<img src="./images/task3_runman.png" class="figure" alt="Running man image" />
+				<img src="./assets/img/rasterization/task3_runman.png" class="figure" alt="Running man image" />
 				<p class="figtext">Running man</p>
 				<br />
 				<p>We also made another one.</p>
-				<img src="./images/task3_pissguy.png" class="figure" alt="Pissman image" />
+				<img src="./assets/img/rasterization/task3_pissguy.png" class="figure" alt="Pissman image" />
 				<p class="figtext">Bros gotta piss</p>
 			</div>
 
@@ -180,7 +180,7 @@
 					For example, a point within a triangle could be defined by its vertices. Take the following triangle :
 				</p>
 				<div id="img-by-txt">
-					<img src="./images/task_4_triangle.png" alt="Cyan-colored triangle" height="200px"/>
+					<img src="./assets/img/rasterization/task_4_triangle.png" alt="Cyan-colored triangle" height="200px"/>
 					<p>
 						In the given image, define the vertices, starting top left and going clockwise, as \(V_A, V_B, V_C\). In a barycentric coordinate system of \((V_A, V_B, V_C)\), the point  \((\frac{1}{3}, \frac{1}{3}, \frac{1}{3})\)  would define the midpoint of the triangle,  the point (1, 0, 0)  would lie atop the point \(V_A\), and \((\frac{1}{5}, \frac{1}{5}, \frac{3}{5})\)  would be closer to \(V_C\) and further from \(V_A\) and \(V_B\). 
 					</p>
@@ -188,7 +188,7 @@
 				<p>
 					This idea can be applied to the triangle to color it, seen below:
 				</p>
-				<img src="./images/task_4_gradient_triangle.png" class="figure" alt="Gradient triangle" />
+				<img src="./assets/img/rasterization/task_4_gradient_triangle.png" class="figure" alt="Gradient triangle" />
 				<p class="figtext">Barycentric-coloring of a triangle</p>
 				<br />
 				<p>
@@ -199,7 +199,7 @@
 					This concept can be extended to create a color wheel:
 				</p>
 				<br/>
-				<img src="./images/task_4_color_wheel.png" class="figure" alt="Color wheel image" />
+				<img src="./assets/img/rasterization/task_4_color_wheel.png" class="figure" alt="Color wheel image" />
 				<p class="figtext">Barycentric color wheel</p>
 			</div>
 
@@ -221,21 +221,21 @@
 					<table style="width: 100%; text-align: center; border-collapse: collapse;">
 						<tr>
 							<td style="text-align: center;">
-								<img src="images/ss_nearest1.png" width="400px" />
+								<img src="./assets/img/rasterization/ss_nearest1.png" width="400px" />
 								<figcaption>Nearest-pixel sampling — 1 sample per pixel</figcaption>
 							</td>
 							<td style="text-align: center;">
-								<img src="images/ss_nearest16.png" width="400px" />
+								<img src="./assets/img/rasterization/ss_nearest16.png" width="400px" />
 								<figcaption>Nearest-pixel sampling — 16 samples per pixel</figcaption>
 							</td>
 						</tr>
 						<tr>
 							<td style="text-align: center;">
-								<img src="images/ss_bilinear1.png" width="400px" />
+								<img src="./assets/img/rasterization/ss_bilinear1.png" width="400px" />
 								<figcaption>Bilinear sampling — 1 sample per pixel</figcaption>
 							</td>
 							<td style="text-align: center;">
-								<img src="images/ss_bilinear16.png" width="400px" />
+								<img src="./assets/img/rasterization/ss_bilinear16.png" width="400px" />
 								<figcaption>Bilinear sampling — 16 samples per pixel</figcaption>
 							</td>
 						</tr>
@@ -265,21 +265,21 @@
 					<table style="width: 100%; text-align: center; border-collapse: collapse;">
 						<tr id="top">
 							<td class="left" style="text-align: center;">
-								<img src="images/ss_levelzero_pnearest.png" width="400px" />
+								<img src="./assets/img/rasterization/ss_levelzero_pnearest.png" width="400px" />
 								<figcaption>Zero level-sample, nearest pixel sample</figcaption>
 							</td>
 							<td style="text-align: center;">
-								<img src="images/ss_levelzero_plinear.png" width="400px" />
+								<img src="./assets/img/rasterization/ss_levelzero_plinear.png" width="400px" />
 								<figcaption>Zero level-sample, bilinear pixel sample</figcaption>
 							</td>
 						</tr>
 						<tr>
 							<td class="left" style="text-align: center;">
-								<img src="images/ss_levelnearest_pnearest.png" width="400px" />
+								<img src="./assets/img/rasterization/ss_levelnearest_pnearest.png" width="400px" />
 								<figcaption>Nearest level-sample, nearest pixel sample</figcaption>
 							</td>
 							<td style="text-align: center;">
-								<img src="images/ss_levelnearest_plinear.png" width="400px" />
+								<img src="./assets/img/rasterization/ss_levelnearest_plinear.png" width="400px" />
 								<figcaption>Nearest level-sample, bilinear pixel sample</figcaption>
 							</td>
 						</tr>
@@ -291,32 +291,6 @@
 
 				</p>
 			</div>
-
-	<!-- <p>Here is an example 2x2 gridlike structure using an HTML table. Each <b>tr</b> is a row and each <b>td</b> is a column in that row. You might find this useful for framing and showing your result images in an organized fashion.</p>-->
-			<!-- <div style="display: flex; flex-direction: column; align-items: center;">
-		<table style="width: 100%; text-align: center; border-collapse: collapse;">
-			<tr>
-				<td style="text-align: center;">
-					<img src="images/image1.png" width="400px" />
-					<figcaption>Caption goes here.</figcaption>
-				</td>
-				<td style="text-align: center;">
-					<img src="images/image2.png" width="400px" />
-					<figcaption>Caption goes here.</figcaption>
-				</td>
-			</tr>
-			<tr>
-				<td style="text-align: center;">
-					<img src="images/image3.png" width="400px" />
-					<figcaption>Caption goes here.</figcaption>
-				</td>
-				<td style="text-align: center;">
-					<img src="images/image4.png" width="400px" />
-					<figcaption>Caption goes here.</figcaption>
-				</td>
-			</tr>
-		</table>
-	</div> -->
 		</div>
 	</body>
 </html>
