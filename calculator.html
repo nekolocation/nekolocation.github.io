@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Animal Calcing</title>
+    <link rel="icon" type="image/x-icon" href="./assets/calculator/img/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Gorditas:wght@400;700&family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>    
+      :root {
+        --cat-main_color: #EBC77E;
+        --cat-dark_color: #978051;
+        --cat-highlight_color: #ffeabb;
+        --cat-ear_color: #E88880;
+
+        --orange_color: #ec6935;
+        --dark-orange_color: #9c3d17;
+        --orange-highlight_color: #ffb294;
+      }
+
+      html {
+        text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+      }
+
+      body {
+        background-image: url('./assets/calculator/img/tile1.svg');
+        background-repeat: repeat;
+        font-family: "Gorditas";
+        margin: 0;
+        padding: 0;
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+
+        width: 100vw;
+        margin-left: auto;
+        margin-right: auto;
+
+        /* replacing bg animation from JS lol */
+        animation: moveBackground 12s linear infinite; 
+      }
+      @keyframes moveBackground {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: -250px -250px;
+        }
+      }
+      
+      h1 {
+        font-size: 50px;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        text-shadow: -2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white, 2px 2px 0 white;
+
+        justify-content: center;
+        padding-bottom: 30px;
+      }
+      #page-title {
+        display: flex;
+        margin-top: 20px;
+        align-self: center;
+        width: 100%;
+      }
+      /* Media query for screens less than 670px */
+      @media (max-width: 670px) {
+        #page-title {
+          font-size: 40px;
+          margin-top: 10px;
+        }
+      }
+      h3 {
+        text-align: center;
+        font-size: 26px;
+      }
+      
+      header {
+        padding: 10px;
+        width: 100vw;
+        height: 80px;
+      }
+      
+      main {
+        margin-top: 10px;
+      }
+      
+      ul {
+        margin: 5px;
+        list-style: none;
+        padding: 0;
+        border: 0;
+      }
+      li, form {
+        padding: 0;
+        border: 0;
+      }
+
+      #input-form {
+        display: flex;
+        flex-direction: column;
+      }
+      #input-form {
+        margin-top: 50px;
+      }
+
+      .error-text {
+        color: red;
+      }
+
+      #input-prompt {
+        /* margin-top: 20px; */
+        text-align: center;
+        font-size: 20px;
+        margin-bottom: 10px;
+        height: 50px;
+      }
+      li {
+        display: flex;
+        position: relative;
+      }
+
+      /* Radio button redesign */
+      #radio-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        width: 340px;
+      }
+      #button-container {
+        width: 80px;
+        height: 80px;
+      }
+      input[type="radio"] {
+        display: none;
+      }
+      input[type="radio"] + label {
+        padding: 8px 12px;
+        margin: 5px;
+        background-color: var(--orange_color);
+        
+        width: 30px;
+        height: 30px;
+
+        text-align: center;
+        font-size: 16px;
+        line-height: 30px;
+
+        border-radius: 7px;
+        border-width: 5px;
+        border-style: solid;
+        border-right: 5px solid var(--dark-orange_color);
+        border-bottom: 5px solid var(--dark-orange_color);
+        border-top: 0;
+        border-left: 0;
+
+        cursor: pointer;
+        transition: all 0.1s ease;
+      }
+      /* Make button appear slightly indented, change color upon hover */
+      input[type="radio"]:hover + label {
+        background-color: var(--orange-highlight_color);
+        transform: translateY(2px) translateX(2px);
+        border-right: 3px solid var(--dark-orange_color);
+        border-bottom: 3px solid var(--dark-orange_color);
+        border-top: 2px solid var(--cat-dark_color);
+        border-left: 2px solid var(--cat-dark_color);
+      }
+      /* Move label diagonal right/down upon click, change borders to look indented */
+      input[type="radio"]:checked + label {
+        transform: translateY(2px) translateX(2px);
+        background-color: var(--orange_color);
+
+        border-radius: 7px;
+        border-width: 5px;
+        border-right: 0;
+        border-bottom: 0;
+        border-top: 5px solid var(--cat-dark_color);
+        border-left: 5px solid var(--cat-dark_color);
+      }
+
+      #ears-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 570px;
+      }
+      .cat-ear {
+        display: flex;
+        justify-content: center;
+
+        width: 0;
+        height: 0;
+        bottom: 0;
+        border-left: 100px solid transparent;
+        border-right: 100px solid transparent;
+        border-bottom: 100px solid var(--cat-main_color);
+      }
+      .inner-ear {
+        position: relative;
+        bottom: -60px;
+        width: 50px;
+        height: 0;
+        border-left: 50px solid transparent;
+        border-right: 50px solid transparent;
+        border-bottom: 40px solid var(--cat-ear_color);
+      }
+
+      #calculator-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 500px;
+        height: 400px;
+
+        border-style:outset;
+        border-width: 35px;
+        border-radius: 100px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        margin-bottom: 30px;
+
+        border-color: var(--cat-main_color);
+        background-color: var(--cat-main_color);
+      }
+      #text-button-container {
+        width: 330px;
+        justify-content: space-between;
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        height: 50px;
+      }
+      #amount-textbox, #calculate-button {
+        border-radius: 10px;
+        line-height: 26px;
+        height: 30px;
+        font-weight: 900;
+        font-family: Karla;
+      }
+      #amount-textbox {
+        border-width: 4px;
+        width: 160px;
+        padding-left: 8px;
+        padding-right: 8px;
+
+        border-style: solid;
+        border-top-color: var(--cat-dark_color);
+        border-left-color: var(--cat-dark_color);
+        border-right-color: var(--cat-highlight_color);
+        border-bottom-color: var(--cat-highlight_color);
+      }
+
+      /* Clickable button customizing */
+      button {
+        display: flex;
+        padding: 8px 12px;
+        margin: 5px;
+        background-color: #508ccc;
+        width: 116px;
+        
+        /* text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white; */
+        padding: 18px;
+        text-align: center;
+        align-items: center;
+        font-size: 16px;
+        line-height: 30px;
+
+        border-radius: 7px;
+        border-width: 5px;
+        border-style: solid;
+        border-right: 5px solid #2E4964;
+        border-bottom: 5px solid #2E4964;
+        border-top: 0;
+        border-left: 0;
+
+        cursor: pointer;
+        transition: all 0.1s ease;
+      }
+
+      /* Make button appear slightly indented and change color upon hover */
+      button:hover {
+        background-color: #7bade2;
+        transform: translateY(2px) translateX(2px);
+        border-right: 3px solid #2E4964;
+        border-bottom: 3px solid #2E4964;
+        border-top: 2px solid var(--cat-dark_color);
+        border-left: 2px solid var(--cat-dark_color);
+      }
+
+      /* Move button slightly diagonal right/down upon click, change borders to look indented */
+      button:active {
+        transform: translateY(2px) translateX(2px);
+        background-color: #7bade2;
+
+        border-radius: 7px;
+        border-width: 5px;
+        border-right: 0;
+        border-bottom: 0;
+        border-top: 5px solid var(--cat-dark_color);
+        border-left: 5px solid var(--cat-dark_color);
+      }
+
+
+      #results-table {
+        /* display: flex; */
+        margin-top: 40px;
+        margin-bottom: 30px;
+        margin-left: 20px;
+        margin-right: 20px;
+        width: 460px;
+        height: 120px;
+
+        table-layout: fixed
+      }
+      /* tr {
+        width: 500px;
+      } */
+      th, td {
+        width: 50px;
+        text-align: center;
+        
+        border-style: solid;
+        border-width: 2px;
+        border-top-color: var(--cat-dark_color);
+        border-left-color: var(--cat-dark_color);
+        border-right-color: var(--cat-highlight_color);
+        border-bottom-color: var(--cat-highlight_color);
+      }
+      th {
+        font-size: 20px;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        background-color: rgb(73, 79, 80);
+        /* background-color: rgb(34, 148, 156); */
+      }
+      td {
+        width: 85px;
+        max-width: 85px;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        background-color: rgb(204, 233, 216);
+
+        overflow-wrap: break-word;
+        text-align: center;
+        padding: 10px;
+        line-height: 22px;
+      }
+
+      #writeup {
+        /* display: inline; */
+        align-items: center;
+        width: 600px;
+
+        color: white;
+        text-shadow: none;
+        line-height: 26px;
+        font-weight: 700;
+        font-family: Karla;
+
+        background-color: rgba(40, 1, 77, 0.938);
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+
+        border-radius: 30px;
+      }
+      #info-button {
+        display: none;
+      }
+
+      #toggle-container {
+        position: absolute;
+        top: 40px;
+        left: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 200px;
+        width: 50px;
+
+        z-index: 100;
+      }
+      #toggleSFX {
+        background-color: var(--orange_color);
+        border-radius: 100%;
+        padding: 10px;
+
+        overflow: visible;
+      }
+      #toggleMusic {
+        background-color: var(--cat-main_color);
+        border-radius: 100%;
+        padding: 10px;
+
+        overflow: visible;
+      }
+      #toggleBG {
+        background-color: #FF667F;
+        border-radius: 100%;
+        padding: 4px;
+
+        overflow: visible;
+      }
+      .toggle-button {
+        cursor: pointer;
+        border-style: solid;
+        border-color: white;
+        border-radius: 1px;
+      }
+    </style>
+
+
+  </head>
+  <body>
+    <header>
+      <h1 id="page-title">Currency Converter</h1>
+    </header>
+
+    <div id="toggle-container">
+      <img src="./assets/calculator/img/volume.png" alt="Speaker icon" width="30" height="30" id="toggleSFX" class="toggle-button" onclick="toggleMuteSFX()"/>
+      <img src="./assets/calculator/img/playMusic.png" alt="Speaker icon" width="30" height="30" id="toggleMusic" class="toggle-button" onclick="toggleMusic()"/>
+      <img src="./assets/calculator/img/eye.png" alt="Speaker icon" width="42" height="42" id="toggleBG" class="toggle-button" onclick="toggleBG()"/>
+    </div>
+    <main>
+      <div id="ears-container">
+        <div class="cat-ear" id="left-ear"><div class="inner-ear"></div></div>
+        <div class="cat-ear" id="right-ear"><div class="inner-ear"></div></div>
+      </div>
+      <div id="calculator-body">
+        <table id="results-table">
+          <thead>
+            <tr>
+              <th id="usd-header">USD</th>
+              <th id="cad-header">CAD</th>
+              <th id="eur-header">EUR</th>
+              <th id="jpy-header">JPY</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="usd-calculated">0</td>
+              <td id="cad-calculated">0</td>
+              <td id="eur-calculated">0</td>
+              <td id="jpy-calculated">0</td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="input-prompt">Select a base-currency and input an amount ⤵</div>
+        <ul id="radio-container">
+          <li id="button-container">
+            <input type="radio" id="usd-clickable" name="input-currency" value="USD">
+            <label for="usd-clickable">USD</label><br>
+          </li>
+          <li id="button-container">
+            <input type="radio" id="cad-clickable" name="input-currency" value="CAD">
+            <label for="cad-clickable">CAD</label><br>
+          </li>
+          <li id="button-container">
+            <input type="radio" id="eur-clickable" name="input-currency" value="EUR">
+            <label for="eur-clickable">EUR</label><br>
+          </li>
+          <li id="button-container">
+            <input type="radio" id="jpy-clickable" name="input-currency" value="JPY">
+            <label for="jpy-clickable">JPY</label><br>
+          </li>
+        </ul>
+        <div id="text-button-container">
+          <input type="text" id="amount-textbox"> 
+          <button type="button" id="calculate-button" role="submit">Calculate</button>
+        </div>
+      </div>
+    </main>
+
+    <div id="writeup">
+      <div id="info-button">ℹ</div>
+      <h3>Design goal: Animal Crossing Feeling</h3>
+      <p>For this project, I tried to invoke the feeling of inputting text in an Animal Crossing interface. The following design choices were made in order to accomplish this:
+        <ul>
+          <li>○ Recreation of the Animal Crossing soundfont on number input.</li>
+          <li>○ Recreation of an animated scrolling background (from DS edition).</li>
+          <li>○ Use of a font reminiscent of the Animal Crossing logo.</li>
+          <li>○ Div-sculpting to make an animal-shaped calculator (cat head).</li>
+          <li>○ Generally trying to make the experience fun and cozy.</li>
+        </ul>
+      In designing the shape of the calculator, I was inspired by physical calculators and toys, and tried to make the radio buttons feel more like a real button you might be able to click.
+      </p>
+    </div>
+
+    <script>
+      const usdButtonDiv = document.getElementById('usd-clickable');
+      const eurButtonDiv = document.getElementById('eur-clickable');
+      const cadButtonDiv = document.getElementById('cad-clickable');
+      const jpyButtonDiv = document.getElementById('jpy-clickable');
+      const promptDiv = document.getElementById('input-prompt');
+
+      const promptMessage = promptDiv.innerHTML;
+      
+      var sfxVolume = 0.5;
+      var oldSfxVolume = sfxVolume;
+      var mutedSFX = false;
+
+      var music = new Audio('./assets/calculator/sound/music8pm.mp3');
+      music.volume = 0.3;
+      music.loop = true;
+
+      // Values fetched April 15 2025; used for default values if API unavailable. 
+      const manual_update = "April 15 2025";
+      let EUR_PER_USD = 0.88;
+      let CAD_PER_USD = 1.39;
+      let JPY_PER_USD = 142.97;
+
+      function getCurrency(){
+        const capik = 'Y3VyX2xpdmVfanFUWEJMNU02bWZoQWNIQzFOT25VZDN2RkU1dmNrYXhrUE0wQWM4aA=='; // look i dont have a private server set up to handle this off-site from Gitpages ok
+
+        const fetchCurrencyRates = () => {
+            const url = `https://api.currencyapi.com/v3/latest?apikey=${atob(capik)}&base_currency=USD&currencies=EUR,CAD,JPY`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const rates = {
+                        EUR: data.data.EUR,
+                        CAD: data.data.CAD,
+                        JPY: data.data.JPY,
+                        lastUpdated: Date.now() // timestamp when the data is fetched so we can refresh the cache every 24h
+                    };
+
+                    localStorage.setItem('currencyRates', JSON.stringify(rates));
+                    setCurrencyRates(rates);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    console.log("Using default values, updated " + manual_update + '.');
+                });
+         };
+
+        // function to set the currency rate vals
+        const setCurrencyRates = (rates) => {
+            EUR_PER_USD = rates.EUR['value'];
+            CAD_PER_USD = rates.CAD['value'];
+            JPY_PER_USD = rates.JPY['value'];
+
+            console.log('Currency rates set to values:', { "EUR": EUR_PER_USD, "CAD": CAD_PER_USD, "JPY": JPY_PER_USD });
+        };
+
+        // check localStorage first
+        const storedRates = JSON.parse(localStorage.getItem('currencyRates'));
+
+        if (storedRates) {
+            // if localStorage isn't empty, check whether cache is older than 24h
+            const currentTime = Date.now();
+            const timeDifference = currentTime - storedRates.lastUpdated;
+
+            // fetch new data if data is too old (86400000 ms == 24h) 
+            if (timeDifference > 86400000) {
+                console.log('Cached API data is older than 24 hours, fetching new data...');
+                fetchCurrencyRates();
+            } else {
+                console.log('Cached API data is from within 24 hours, using data from localStorage.');
+                setCurrencyRates(storedRates);
+            }
+        } else {
+            console.log('No data in localStorage, fetching data from API...');
+            fetchCurrencyRates();
+        }
+    }
+    getCurrency();
+
+      const calculateClickable = document.getElementById("calculate-button");
+      calculateClickable.addEventListener("click", convertUserInput);
+      
+      function convertUserInput() {
+        const amountTextbox = document.getElementById("amount-textbox");
+        const amount = amountTextbox.value;
+        const amountAsNumber = parseFloat(amount);
+
+        // Error valuable for checking positive number and radio button pressed
+        let error = false;
+        let message = "";
+
+        let inputCurrency = null;
+        if (document.getElementById('usd-clickable').checked) {
+          inputCurrency = "USD";
+        } else if (document.getElementById('eur-clickable').checked) {
+          inputCurrency = "EUR";
+        } else if (document.getElementById('cad-clickable').checked) {
+          inputCurrency = "CAD";
+        } else if (document.getElementById('jpy-clickable').checked) {
+          inputCurrency = "JPY";
+        } else {
+          error = true;
+          message = "Please push a button for input currency."
+        }
+
+        if (!((typeof amountAsNumber === 'number') && (amountAsNumber > 0))) {
+          error = true;
+          if (!(message == "")) {
+            message += '<br>'
+          }
+          message += "Please set input value to a positive number.";
+        } 
+        
+        // Make sure no errors before continuing
+        if (error) {
+          errorMessage(message);
+          return;
+        } else {
+          errorMessageClear();
+        }
+
+        // First convert input into USD
+        let usdConverted = eurConverted = cadConverted = jpyConverted = 0;
+        switch (inputCurrency) {
+          case "USD":
+            usdConverted = amountAsNumber;
+            break;
+          case "EUR":
+            eurConverted = amountAsNumber; 
+            usdConverted = (amountAsNumber/EUR_PER_USD);
+            break;
+          case "CAD":
+            cadConverted = amountAsNumber;
+            usdConverted = (amountAsNumber/CAD_PER_USD);
+            break;
+          case "JPY":
+            jpyConverted = amountAsNumber;
+            usdConverted = (amountAsNumber/JPY_PER_USD);
+            break;
+          default:
+            console.log("No from value selected.");
+            return;
+        }
+
+        if (eurConverted == 0) {
+          eurConverted = (usdConverted * EUR_PER_USD);
+        }
+        if (cadConverted == 0) {
+          cadConverted = (usdConverted * CAD_PER_USD);
+        }
+        if (jpyConverted == 0) {
+          jpyConverted = (usdConverted * JPY_PER_USD);
+        }
+
+        playSound('./assets/calculator/sound/amazed.mp3')
+        // Once you have the result, you can set the content of each element with the appropriate ID:
+        //  document.getElementById("usd-calculated").textContent = ...;
+        document.getElementById("usd-calculated").textContent = '$' + usdConverted.toFixed(2);
+        document.getElementById("usd-header").style.backgroundColor = "#22949c";
+        document.getElementById("usd-calculated").style.backgroundColor = "#99e0b7";
+
+        // Show numbers instantly
+        document.getElementById("eur-calculated").textContent = '€' + eurConverted.toFixed(2);
+        document.getElementById("cad-calculated").textContent = '$' + cadConverted.toFixed(2);
+        document.getElementById("jpy-calculated").textContent = '¥' + jpyConverted.toFixed(2);
+
+        // Queue color change with SFX
+        sleep(40).then(() => { 
+          // document.getElementById("cad-calculated").textContent = cadConverted.toFixed(2);
+          document.getElementById("cad-header").style.backgroundColor = "#22949c";
+          document.getElementById("cad-calculated").style.backgroundColor = "#99e0b7"; });
+        sleep(80).then(() => { 
+          // document.getElementById("eur-calculated").textContent = eurConverted.toFixed(2); 
+          document.getElementById("eur-header").style.backgroundColor = "#22949c";
+          document.getElementById("eur-calculated").style.backgroundColor = "#99e0b7"; });
+        sleep(120).then(() => { 
+          // document.getElementById("jpy-calculated").textContent = jpyConverted.toFixed(2); 
+          document.getElementById("jpy-header").style.backgroundColor = "#22949c";
+          document.getElementById("jpy-calculated").style.backgroundColor = "#99e0b7"; });
+
+        return;
+        }
+
+        const bgArray = ['./assets/calculator/img/tile1.svg', './assets/calculator/img/tile2.svg', './assets/calculator/img/tile1.svg'];
+
+        function errorMessage(msg) {
+          promptDiv.innerHTML = msg;
+          promptDiv.classList.add('error-text');
+          playSound('./assets/calculator/sound/resignation.mp3');
+        }
+        function errorMessageClear() {
+          promptDiv.classList.remove('error-text');
+          promptDiv.innerHTML = promptMessage;
+        }
+        function playSound(src, volume=sfxVolume) {
+          let sound = new Audio(src);
+          sound.volume = volume;
+          sound.play();
+        }
+        function playMusic() {
+          music.play();
+          document.getElementById('toggleMusic').src = './assets/calculator/img/pauseMusic.png';
+        }
+        function pauseMusic() {
+          music.pause();
+          document.getElementById('toggleMusic').src = './assets/calculator/img/playMusic.png';
+        }
+        // Animal crossing SFX courtesy Chroma_mod via https://pixabay.com/sound-effects/search/animal%20crossing/
+        // Number sounds made with help from Hotmatilka https://www.youtube.com/@Hotmatilka
+        // Keyboard click sound is a combination of several royalty-free sounds
+        // Volume icons via https://stock.adobe.com/images/sound-on-off-icons-vector-in-line-style-sound-volume-and-mute-icon/594319926 (edited by me)
+
+        function typeDetect(value) {
+          let keystroke = value.key;
+
+          if (keystroke === "Enter") {
+            convertUserInput();
+            return;
+          }
+
+          let valueAsNumber = parseInt(keystroke);
+          if ((valueAsNumber > -1) && (valueAsNumber < 10)) {
+            let filename = './assets/calculator/sound/' + keystroke + '_fontB.mp3';
+            playSound(filename);
+          }
+        }
+
+        function toggleMuteSFX() {
+          console.log("SFX toggled.");
+          if (mutedSFX) {
+            unmuteSFX();
+          } else {
+            muteSFX();
+          }
+        }
+        function muteSFX() {
+          oldSfxVolume = sfxVolume;
+          sfxVolume = 0;
+          mutedSFX = true;
+          document.getElementById('toggleSFX').src = './assets/calculator/img/mute.png';
+        }
+        function unmuteSFX() {
+          sfxVolume = oldSfxVolume;
+          mutedSFX = false;
+          document.getElementById('toggleSFX').src = './assets/calculator/img/volume.png';
+        }
+
+        function toggleMusic() {
+          console.log("Music toggled.")
+          if (!music.played || music.paused) {
+            playMusic();
+          } else {
+            pauseMusic();
+          }
+        }
+
+        function toggleBG() {
+          console.log("Background toggled.")
+          let bgImg = window.getComputedStyle(document.body).backgroundImage;
+          if (bgImg.includes('tile1')) {
+            document.body.style.backgroundImage = "url('./assets/calculator/img/tile2.svg')";
+            document.getElementById('toggleBG').style.backgroundColor = "#8769C6";
+          } else {
+            document.body.style.backgroundImage = "url('./assets/calculator/img/tile1.svg')";
+            document.getElementById('toggleBG').style.backgroundColor = "#FF667F";
+          }
+        }
+        
+
+        // The following code via https://www.sitepoint.com/delay-sleep-pause-wait/
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function playClack() {
+          let sound = new Audio('./assets/calculator/sound/clack.mp3');
+          sound.volume = sfxVolume;
+          sound.play();
+        }
+        usdButtonDiv.addEventListener("click", playClack );
+        eurButtonDiv.addEventListener("click", playClack);
+        cadButtonDiv.addEventListener("click", playClack);
+        jpyButtonDiv.addEventListener("click", playClack);
+        document.getElementById('amount-textbox').addEventListener("keypress", typeDetect);
+    </script>
+
+  </body>
+
+</html>
