@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Jopping Gen</title>
+    <link rel="icon" type="image/x-icon" href="./assets/jop/wolf.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gorditas:wght@400;700&family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- <link rel="stylesheet" href="./assets/jop/styles.css"> -->
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+        }
+        html {
+            background-color: black;
+        }
+
+        header, #you-are {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 60px;
+            font-weight: bolder;
+            background-color: white;
+
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+
+        #img-container {
+            width: 100vw;
+            margin-left: auto;
+            margin-right: auto;
+            /* Example: 56.25% = 9 / 16 (for 16:9 ratio) */
+            padding-bottom: 56.25%;
+            background-image: url('./assets/jop/two-wolves.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        #wolf-one {
+            display: block;
+            position: absolute;
+            left: 10%;
+            top: 32%;
+        }
+        #wolf-two {
+            display: block;
+            position: absolute;
+            right: 10%;
+            top: 32%;
+        }
+        .wolf-text {
+            color: yellow;
+            font-size: 54px;
+
+            text-align: center;
+            font-weight: 100;
+        }
+        body > div {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- image sourced from https://wallpaper-mania.com/post/wallpaper-id-7770006769/ -->
+    <div>
+        <header>
+            <div id="inside-1">INSIDE YOU THERE</div>
+            <div id="inside-2">ARE TWO WOLVES</div>
+        </header>
+        <div id="img-container">
+            <div id="wolf-one" class="wolf-text">
+                <div>one is</div>
+                <div id="j-word"></div>
+            </div>
+            <div id="wolf-two" class="wolf-text">
+                <div>one is</div>
+                <div id="opp-word"></div>
+            </div>
+        </div>
+        <div id="you-are">YOU ARE JOPPING</div>
+    </div>
+
+
+    <script>
+        const J_LIST = [
+            "joking", "jawing", "joying", "jowing", "juking", "japing", "jewing", "jibing", "jading", "jeeing", "jiving", "jigging", "joining", "jeeping", "jeering", "jelling", "juicing", "jogging", "jobbing", "jerking", "jessing", "jotting", "jesting", "jetting", "joshing", "jinxing", "jibbing", "jinking", "jouking", "jilting", "jazzing", "jauking", "jumping", "jacking", "jolting", "justing", "junking", "jurying", "jamming", "jambing", "jailing", "jutting", "jarring", "jagging", "judging", "jabbing", "jugging", "jauping", "jingling", "joisting", "jollying", "jointing", "justling", "jangling", "joggling", "juttying", "jimmying", "jettying", "jaunting", "jemmying", "juggling", "jauncing", "jousting", "jumbling", "jellying", "jeweling", "jouncing", "jiggling", "jostling", "juddering", "junketing", "joyriding", "jawboning", "japanning", "jewelling", "jiggering", "jabbering", "jigsawing", "jittering", "jockeying", "jacketing", "jargoning", "jaundicing", "jugulating", "jarovizing", "julienning", "japanizing", "jaculating", "justifying", "javelining", "jointuring", "jaywalking", "jubilating", "jellifying", "joypopping", "jeoparding", "journeying", "jollifying", "jettisoning", "jackknifing", "jargonizing", "juxtaposing", "jackrolling", "jeopardizing", "jeopardising", "journalizing", "jitterbugging", "jackhammering"
+        ]
+
+        const OPPING_LIST = [
+            'freighthopping', 'intercropping', 'sharecropping', 'eavesdropping', 'underpropping', 'showstopping', 'backstopping','blacktopping','overcropping','paradropping','backdropping','hedgehopping','teleshopping','flipflopping','clodhopping','outcropping','airdropping','outdropping','misstopping','overtopping','unstopping','uppropping','barhopping','carhopping','joypopping','stropping','estopping','dropping','whopping','glopping','plopping','slopping','cropping','chopping','clopping','flopping','shopping','stopping','propping','swopping','topping','popping','sopping','mopping','fopping','hopping','bopping','copping','lopping'
+        ]
+
+        function getRandomWord(list) {
+            let index = Math.floor(Math.random() * list.length);
+            return list[index];
+        }
+
+        document.getElementById('j-word').innerHTML = getRandomWord(J_LIST);
+        document.getElementById('opp-word').innerHTML = getRandomWord(OPPING_LIST);
+
+        console.log("sorry.");
+    </script>
+
+</body>
+
+</html>
