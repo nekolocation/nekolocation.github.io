@@ -34,72 +34,78 @@
       <img src="./assets/calculator/img/playMusic.png" alt="Speaker icon" width="30" height="30" id="toggleMusic" class="toggle-button" onclick="toggleMusic()"/>
       <img src="./assets/calculator/img/eye.png" alt="Speaker icon" width="42" height="42" id="toggleBG" class="toggle-button" onclick="toggleBG()"/>
     </div>
+
     <main>
-      <div id="ears-container">
-        <div class="cat-ear" id="left-ear"><div class="inner-ear"></div></div>
-        <div class="cat-ear" id="right-ear"><div class="inner-ear"></div></div>
-      </div>
-      <div id="calculator-body">
-        <table id="results-table">
-          <thead>
-            <tr>
-              <th id="usd-header">USD</th>
-              <th id="cad-header">CAD</th>
-              <th id="eur-header">EUR</th>
-              <th id="jpy-header">JPY</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td id="usd-calculated">0</td>
-              <td id="cad-calculated">0</td>
-              <td id="eur-calculated">0</td>
-              <td id="jpy-calculated">0</td>
-            </tr>
-          </tbody>
-        </table>
-        <div id="input-prompt">Select a base-currency and input an amount ⤵</div>
-        <ul id="radio-container">
-          <li id="button-container">
-            <input type="radio" id="usd-clickable" name="input-currency" value="USD">
-            <label for="usd-clickable">USD</label><br>
-          </li>
-          <li id="button-container">
-            <input type="radio" id="cad-clickable" name="input-currency" value="CAD">
-            <label for="cad-clickable">CAD</label><br>
-          </li>
-          <li id="button-container">
-            <input type="radio" id="eur-clickable" name="input-currency" value="EUR">
-            <label for="eur-clickable">EUR</label><br>
-          </li>
-          <li id="button-container">
-            <input type="radio" id="jpy-clickable" name="input-currency" value="JPY">
-            <label for="jpy-clickable">JPY</label><br>
-          </li>
-        </ul>
-        <div id="text-button-container">
-          <input type="text" id="amount-textbox"> 
-          <button type="button" id="calculate-button" role="submit">Calculate</button>
+      <div id="box">
+        <div id="ears-container">
+          <div class="cat-ear" id="left-ear"><div class="inner-ear"></div></div>
+          <div class="cat-ear" id="right-ear"><div class="inner-ear"></div></div>
+        </div>
+        <div id="calculator-body">
+          <table id="results-table">
+            <thead>
+              <tr>
+                <th id="usd-header">USD</th>
+                <th id="cad-header">CAD</th>
+                <th id="eur-header">EUR</th>
+                <th id="jpy-header">JPY</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="usd-calculated">0</td>
+                <td id="cad-calculated">0</td>
+                <td id="eur-calculated">0</td>
+                <td id="jpy-calculated">0</td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="input-prompt">Select a base-currency and input an amount ⤵</div>
+          <ul id="radio-container">
+            <li id="button-container">
+              <input type="radio" id="usd-clickable" name="input-currency" value="USD">
+              <label for="usd-clickable">USD</label><br>
+            </li>
+            <li id="button-container">
+              <input type="radio" id="cad-clickable" name="input-currency" value="CAD">
+              <label for="cad-clickable">CAD</label><br>
+            </li>
+            <li id="button-container">
+              <input type="radio" id="eur-clickable" name="input-currency" value="EUR">
+              <label for="eur-clickable">EUR</label><br>
+            </li>
+            <li id="button-container">
+              <input type="radio" id="jpy-clickable" name="input-currency" value="JPY">
+              <label for="jpy-clickable">JPY</label><br>
+            </li>
+          </ul>
+          <div id="text-button-container">
+            <input type="text" id="amount-textbox"> 
+            <button type="button" id="calculate-button" role="submit">Calculate</button>
+          </div>
         </div>
       </div>
     </main>
 
-    <div id="writeup">
-      <!-- TODO:
-       - make info box a toggle, with more info 
-        - set up info box for credits -->
-      <div id="info-button">ℹ</div>
-      <h3>Design goal: Animal Crossing Feeling</h3>
-      <p>For this project, I tried to invoke the feeling of inputting text in an Animal Crossing interface. The following design choices were made in order to accomplish this:
-        <ul>
-          <li>○ Recreation of the Animal Crossing soundfont on number input.</li>
-          <li>○ Recreation of an animated scrolling background (from DS edition).</li>
-          <li>○ Use of a font reminiscent of the Animal Crossing logo.</li>
-          <li>○ Div-sculpting to make an animal-shaped calculator (cat head).</li>
-          <li>○ Generally trying to make the experience fun and cozy.</li>
-        </ul>
-      In designing the shape of the calculator, I was inspired by physical calculators and toys, and tried to make the radio buttons feel more like a real button you might be able to click.
-      </p>
+    <div id="info-icon" onclick="togglePopup()"></div>
+    <!-- TODO: stop writeup clicks from toggling popup -->
+    <!-- https://kotomi-noguchi.medium.com/javascript-preventing-parent-event-when-child-event-is-triggered-cfc3569f002f -->
+    <div id="THE-FOG" class="hideDiv" onclick="togglePopup()">
+      <div id="writeup" class="hideDiv">
+        <h3 class="writeup-header">About this project</h3>
+        <div class="writeup-body">
+          <p>For this project, I tried to invoke the feeling of inputting text in an Animal Crossing interface. The following design choices were made in order to accomplish this:
+            <ul>
+              <li>○ Recreation of the Animal Crossing soundfont on number input.</li>
+              <li>○ Recreation of an animated scrolling background (from DS edition).</li>
+              <li>○ Use of a font reminiscent of the Animal Crossing logo.</li>
+              <li>○ Div-sculpting to make an animal-shaped calculator (cat head).</li>
+              <li>○ Generally trying to make the experience fun and cozy.</li>
+            </ul>
+          In designing the shape of the calculator, I was inspired by physical calculators and toys, and tried to make the radio buttons feel more like a real button you might be able to click.
+          </p>
+        </div> 
+      </div>
     </div>
 
     <script>
@@ -124,6 +130,17 @@
       let EUR_PER_USD = 0.88;
       let CAD_PER_USD = 1.39;
       let JPY_PER_USD = 142.97;
+
+      // For showing info box
+      const fogDiv = document.getElementById('THE-FOG');
+      const writeup = document.getElementById('writeup');
+      const infoIcon = document.getElementById('info-icon');
+      function togglePopup() {
+        fogDiv.classList.toggle('hideDiv');
+        writeup.classList.toggle('hideDiv');
+        infoIcon.classList.toggle('hideDiv');
+      }
+
 
       function getCurrency(){
         const capik = 'Y3VyX2xpdmVfanFUWEJMNU02bWZoQWNIQzFOT25VZDN2RkU1dmNrYXhrUE0wQWM4aA=='; // look i dont have a private server set up to handle this off-site from Gitpages ok
@@ -182,211 +199,211 @@
     }
     getCurrency();
 
-      const calculateClickable = document.getElementById("calculate-button");
-      calculateClickable.addEventListener("click", convertUserInput);
+    const calculateClickable = document.getElementById("calculate-button");
+    calculateClickable.addEventListener("click", convertUserInput);
+    
+    function convertUserInput() {
+      const amountTextbox = document.getElementById("amount-textbox");
+      const amount = amountTextbox.value;
+      const amountAsNumber = parseFloat(amount);
+
+      // Error valuable for checking positive number and radio button pressed
+      let error = false;
+      let message = "";
+
+      let inputCurrency = null;
+      if (document.getElementById('usd-clickable').checked) {
+        inputCurrency = "USD";
+      } else if (document.getElementById('eur-clickable').checked) {
+        inputCurrency = "EUR";
+      } else if (document.getElementById('cad-clickable').checked) {
+        inputCurrency = "CAD";
+      } else if (document.getElementById('jpy-clickable').checked) {
+        inputCurrency = "JPY";
+      } else {
+        error = true;
+        message = "Please push a button for input currency."
+      }
+
+      if (!((typeof amountAsNumber === 'number') && (amountAsNumber > 0))) {
+        error = true;
+        if (!(message == "")) {
+          message += '<br>'
+        }
+        message += "Please set input value to a positive number.";
+      } 
       
-      function convertUserInput() {
-        const amountTextbox = document.getElementById("amount-textbox");
-        const amount = amountTextbox.value;
-        const amountAsNumber = parseFloat(amount);
-
-        // Error valuable for checking positive number and radio button pressed
-        let error = false;
-        let message = "";
-
-        let inputCurrency = null;
-        if (document.getElementById('usd-clickable').checked) {
-          inputCurrency = "USD";
-        } else if (document.getElementById('eur-clickable').checked) {
-          inputCurrency = "EUR";
-        } else if (document.getElementById('cad-clickable').checked) {
-          inputCurrency = "CAD";
-        } else if (document.getElementById('jpy-clickable').checked) {
-          inputCurrency = "JPY";
-        } else {
-          error = true;
-          message = "Please push a button for input currency."
-        }
-
-        if (!((typeof amountAsNumber === 'number') && (amountAsNumber > 0))) {
-          error = true;
-          if (!(message == "")) {
-            message += '<br>'
-          }
-          message += "Please set input value to a positive number.";
-        } 
-        
-        // Make sure no errors before continuing
-        if (error) {
-          errorMessage(message);
-          return;
-        } else {
-          errorMessageClear();
-        }
-
-        // First convert input into USD
-        let usdConverted = eurConverted = cadConverted = jpyConverted = 0;
-        switch (inputCurrency) {
-          case "USD":
-            usdConverted = amountAsNumber;
-            break;
-          case "EUR":
-            eurConverted = amountAsNumber; 
-            usdConverted = (amountAsNumber/EUR_PER_USD);
-            break;
-          case "CAD":
-            cadConverted = amountAsNumber;
-            usdConverted = (amountAsNumber/CAD_PER_USD);
-            break;
-          case "JPY":
-            jpyConverted = amountAsNumber;
-            usdConverted = (amountAsNumber/JPY_PER_USD);
-            break;
-          default:
-            console.log("No from value selected.");
-            return;
-        }
-
-        if (eurConverted == 0) {
-          eurConverted = (usdConverted * EUR_PER_USD);
-        }
-        if (cadConverted == 0) {
-          cadConverted = (usdConverted * CAD_PER_USD);
-        }
-        if (jpyConverted == 0) {
-          jpyConverted = (usdConverted * JPY_PER_USD);
-        }
-
-        playSound('./assets/calculator/sound/amazed.mp3')
-        // Once you have the result, you can set the content of each element with the appropriate ID:
-        //  document.getElementById("usd-calculated").textContent = ...;
-        document.getElementById("usd-calculated").textContent = '$' + usdConverted.toFixed(2);
-        document.getElementById("usd-header").style.backgroundColor = "#22949c";
-        document.getElementById("usd-calculated").style.backgroundColor = "#99e0b7";
-
-        // Show numbers instantly
-        document.getElementById("eur-calculated").textContent = '€' + eurConverted.toFixed(2);
-        document.getElementById("cad-calculated").textContent = '$' + cadConverted.toFixed(2);
-        document.getElementById("jpy-calculated").textContent = '¥' + jpyConverted.toFixed(2);
-
-        // Queue color change with SFX
-        sleep(40).then(() => { 
-          // document.getElementById("cad-calculated").textContent = cadConverted.toFixed(2);
-          document.getElementById("cad-header").style.backgroundColor = "#22949c";
-          document.getElementById("cad-calculated").style.backgroundColor = "#99e0b7"; });
-        sleep(80).then(() => { 
-          // document.getElementById("eur-calculated").textContent = eurConverted.toFixed(2); 
-          document.getElementById("eur-header").style.backgroundColor = "#22949c";
-          document.getElementById("eur-calculated").style.backgroundColor = "#99e0b7"; });
-        sleep(120).then(() => { 
-          // document.getElementById("jpy-calculated").textContent = jpyConverted.toFixed(2); 
-          document.getElementById("jpy-header").style.backgroundColor = "#22949c";
-          document.getElementById("jpy-calculated").style.backgroundColor = "#99e0b7"; });
-
+      // Make sure no errors before continuing
+      if (error) {
+        errorMessage(message);
         return;
+      } else {
+        errorMessageClear();
+      }
+
+      // First convert input into USD
+      let usdConverted = eurConverted = cadConverted = jpyConverted = 0;
+      switch (inputCurrency) {
+        case "USD":
+          usdConverted = amountAsNumber;
+          break;
+        case "EUR":
+          eurConverted = amountAsNumber; 
+          usdConverted = (amountAsNumber/EUR_PER_USD);
+          break;
+        case "CAD":
+          cadConverted = amountAsNumber;
+          usdConverted = (amountAsNumber/CAD_PER_USD);
+          break;
+        case "JPY":
+          jpyConverted = amountAsNumber;
+          usdConverted = (amountAsNumber/JPY_PER_USD);
+          break;
+        default:
+          console.log("No from value selected.");
+          return;
+      }
+
+      if (eurConverted == 0) {
+        eurConverted = (usdConverted * EUR_PER_USD);
+      }
+      if (cadConverted == 0) {
+        cadConverted = (usdConverted * CAD_PER_USD);
+      }
+      if (jpyConverted == 0) {
+        jpyConverted = (usdConverted * JPY_PER_USD);
+      }
+
+      playSound('./assets/calculator/sound/amazed.mp3')
+      // Once you have the result, you can set the content of each element with the appropriate ID:
+      //  document.getElementById("usd-calculated").textContent = ...;
+      document.getElementById("usd-calculated").textContent = '$' + usdConverted.toFixed(2);
+      document.getElementById("usd-header").style.backgroundColor = "#22949c";
+      document.getElementById("usd-calculated").style.backgroundColor = "#99e0b7";
+
+      // Show numbers instantly
+      document.getElementById("eur-calculated").textContent = '€' + eurConverted.toFixed(2);
+      document.getElementById("cad-calculated").textContent = '$' + cadConverted.toFixed(2);
+      document.getElementById("jpy-calculated").textContent = '¥' + jpyConverted.toFixed(2);
+
+      // Queue color change with SFX
+      sleep(40).then(() => { 
+        // document.getElementById("cad-calculated").textContent = cadConverted.toFixed(2);
+        document.getElementById("cad-header").style.backgroundColor = "#22949c";
+        document.getElementById("cad-calculated").style.backgroundColor = "#99e0b7"; });
+      sleep(80).then(() => { 
+        // document.getElementById("eur-calculated").textContent = eurConverted.toFixed(2); 
+        document.getElementById("eur-header").style.backgroundColor = "#22949c";
+        document.getElementById("eur-calculated").style.backgroundColor = "#99e0b7"; });
+      sleep(120).then(() => { 
+        // document.getElementById("jpy-calculated").textContent = jpyConverted.toFixed(2); 
+        document.getElementById("jpy-header").style.backgroundColor = "#22949c";
+        document.getElementById("jpy-calculated").style.backgroundColor = "#99e0b7"; });
+
+      return;
+      }
+
+      const bgArray = ['./assets/calculator/img/tile1.svg', './assets/calculator/img/tile2.svg', './assets/calculator/img/tile1.svg'];
+
+      function errorMessage(msg) {
+        promptDiv.innerHTML = msg;
+        promptDiv.classList.add('error-text');
+        playSound('./assets/calculator/sound/resignation.mp3');
+      }
+      function errorMessageClear() {
+        promptDiv.classList.remove('error-text');
+        promptDiv.innerHTML = promptMessage;
+      }
+      function playSound(src, volume=sfxVolume) {
+        let sound = new Audio(src);
+        sound.volume = volume;
+        sound.play();
+      }
+      function playMusic() {
+        music.play();
+        document.getElementById('toggleMusic').src = './assets/calculator/img/pauseMusic.png';
+      }
+      function pauseMusic() {
+        music.pause();
+        document.getElementById('toggleMusic').src = './assets/calculator/img/playMusic.png';
+      }
+      // Animal crossing SFX courtesy Chroma_mod via https://pixabay.com/sound-effects/search/animal%20crossing/
+      // Number sounds made with help from Hotmatilka https://www.youtube.com/@Hotmatilka
+      // Keyboard click sound is a combination of several royalty-free sounds
+      // Volume icons via https://stock.adobe.com/images/sound-on-off-icons-vector-in-line-style-sound-volume-and-mute-icon/594319926 (edited by me)
+
+      function typeDetect(value) {
+        let keystroke = value.key;
+
+        if (keystroke === "Enter") {
+          convertUserInput();
+          return;
         }
 
-        const bgArray = ['./assets/calculator/img/tile1.svg', './assets/calculator/img/tile2.svg', './assets/calculator/img/tile1.svg'];
+        let valueAsNumber = parseInt(keystroke);
+        if ((valueAsNumber > -1) && (valueAsNumber < 10)) {
+          let filename = './assets/calculator/sound/' + keystroke + '_fontB.mp3';
+          playSound(filename);
+        }
+      }
 
-        function errorMessage(msg) {
-          promptDiv.innerHTML = msg;
-          promptDiv.classList.add('error-text');
-          playSound('./assets/calculator/sound/resignation.mp3');
+      function toggleMuteSFX() {
+        console.log("SFX toggled.");
+        if (mutedSFX) {
+          unmuteSFX();
+        } else {
+          muteSFX();
         }
-        function errorMessageClear() {
-          promptDiv.classList.remove('error-text');
-          promptDiv.innerHTML = promptMessage;
-        }
-        function playSound(src, volume=sfxVolume) {
-          let sound = new Audio(src);
-          sound.volume = volume;
-          sound.play();
-        }
-        function playMusic() {
-          music.play();
-          document.getElementById('toggleMusic').src = './assets/calculator/img/pauseMusic.png';
-        }
-        function pauseMusic() {
-          music.pause();
-          document.getElementById('toggleMusic').src = './assets/calculator/img/playMusic.png';
-        }
-        // Animal crossing SFX courtesy Chroma_mod via https://pixabay.com/sound-effects/search/animal%20crossing/
-        // Number sounds made with help from Hotmatilka https://www.youtube.com/@Hotmatilka
-        // Keyboard click sound is a combination of several royalty-free sounds
-        // Volume icons via https://stock.adobe.com/images/sound-on-off-icons-vector-in-line-style-sound-volume-and-mute-icon/594319926 (edited by me)
+      }
+      function muteSFX() {
+        oldSfxVolume = sfxVolume;
+        sfxVolume = 0;
+        mutedSFX = true;
+        document.getElementById('toggleSFX').src = './assets/calculator/img/mute.png';
+      }
+      function unmuteSFX() {
+        sfxVolume = oldSfxVolume;
+        mutedSFX = false;
+        document.getElementById('toggleSFX').src = './assets/calculator/img/volume.png';
+      }
 
-        function typeDetect(value) {
-          let keystroke = value.key;
+      function toggleMusic() {
+        console.log("Music toggled.")
+        if (!music.played || music.paused) {
+          playMusic();
+        } else {
+          pauseMusic();
+        }
+      }
 
-          if (keystroke === "Enter") {
-            convertUserInput();
-            return;
-          }
+      function toggleBG() {
+        console.log("Background toggled.")
+        let bgImg = window.getComputedStyle(document.body).backgroundImage;
+        if (bgImg.includes('tile1')) {
+          document.body.style.backgroundImage = "url('./assets/calculator/img/tile2.svg')";
+          document.getElementById('toggleBG').style.backgroundColor = "#8769C6";
+        } else {
+          document.body.style.backgroundImage = "url('./assets/calculator/img/tile1.svg')";
+          document.getElementById('toggleBG').style.backgroundColor = "#FF667F";
+        }
+      }
+      
 
-          let valueAsNumber = parseInt(keystroke);
-          if ((valueAsNumber > -1) && (valueAsNumber < 10)) {
-            let filename = './assets/calculator/sound/' + keystroke + '_fontB.mp3';
-            playSound(filename);
-          }
-        }
+      // The following code via https://www.sitepoint.com/delay-sleep-pause-wait/
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
 
-        function toggleMuteSFX() {
-          console.log("SFX toggled.");
-          if (mutedSFX) {
-            unmuteSFX();
-          } else {
-            muteSFX();
-          }
-        }
-        function muteSFX() {
-          oldSfxVolume = sfxVolume;
-          sfxVolume = 0;
-          mutedSFX = true;
-          document.getElementById('toggleSFX').src = './assets/calculator/img/mute.png';
-        }
-        function unmuteSFX() {
-          sfxVolume = oldSfxVolume;
-          mutedSFX = false;
-          document.getElementById('toggleSFX').src = './assets/calculator/img/volume.png';
-        }
-
-        function toggleMusic() {
-          console.log("Music toggled.")
-          if (!music.played || music.paused) {
-            playMusic();
-          } else {
-            pauseMusic();
-          }
-        }
-
-        function toggleBG() {
-          console.log("Background toggled.")
-          let bgImg = window.getComputedStyle(document.body).backgroundImage;
-          if (bgImg.includes('tile1')) {
-            document.body.style.backgroundImage = "url('./assets/calculator/img/tile2.svg')";
-            document.getElementById('toggleBG').style.backgroundColor = "#8769C6";
-          } else {
-            document.body.style.backgroundImage = "url('./assets/calculator/img/tile1.svg')";
-            document.getElementById('toggleBG').style.backgroundColor = "#FF667F";
-          }
-        }
-        
-
-        // The following code via https://www.sitepoint.com/delay-sleep-pause-wait/
-        function sleep(ms) {
-          return new Promise(resolve => setTimeout(resolve, ms));
-        }
-
-        function playClack() {
-          let sound = new Audio('./assets/calculator/sound/clack.mp3');
-          sound.volume = sfxVolume;
-          sound.play();
-        }
-        usdButtonDiv.addEventListener("click", playClack );
-        eurButtonDiv.addEventListener("click", playClack);
-        cadButtonDiv.addEventListener("click", playClack);
-        jpyButtonDiv.addEventListener("click", playClack);
-        document.getElementById('amount-textbox').addEventListener("keypress", typeDetect);
+      function playClack() {
+        let sound = new Audio('./assets/calculator/sound/clack.mp3');
+        sound.volume = sfxVolume;
+        sound.play();
+      }
+      usdButtonDiv.addEventListener("click", playClack );
+      eurButtonDiv.addEventListener("click", playClack);
+      cadButtonDiv.addEventListener("click", playClack);
+      jpyButtonDiv.addEventListener("click", playClack);
+      document.getElementById('amount-textbox').addEventListener("keypress", typeDetect);
     </script>
 
   </body>

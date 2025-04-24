@@ -8,6 +8,12 @@
   --orange_color: #ec6935;
   --dark-orange_color: #9c3d17;
   --orange-highlight_color: #ffb294;
+
+  --edge-padding: 20px;
+  --hover-offset: 2px;
+
+  --info-button-size: 40px;
+  --writeup-bg: #28014d;
 }
 
 html {
@@ -59,6 +65,8 @@ h1 {
   align-self: center;
   width: 100%;
 }
+
+
 /* Media query for screens less than 670px */
 /* TODO:
     on smaller size:
@@ -73,6 +81,42 @@ h1 {
     margin-top: 10px;
   }
 }
+
+/* container to hold calculator & help with resizing! */
+#box {
+  /* background-color: rebeccapurple; */
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  font-size: clamp(10px, 3.5vmin, 28px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+/* on portrait mode: box fills to width */
+@media (orientation: portrait) {
+  .box {
+      width: 100vw;
+      height: 100vw;
+  }
+}
+
+/* on landscape mode: box fills to height */
+@media (orientation: landscape) {
+  .box {
+      width: 100vh;
+      height: 100vh;
+  }
+}
+
+
 h3 {
   text-align: center;
   font-size: 26px;
@@ -360,7 +404,8 @@ td {
 #writeup {
   /* display: inline; */
   align-items: center;
-  width: 600px;
+  max-height: 75vh;
+  width: 70vw;
 
   color: white;
   text-shadow: none;
@@ -368,22 +413,74 @@ td {
   font-weight: 700;
   font-family: Karla;
 
-  background-color: rgba(40, 1, 77, 0.938);
+  background-color: var(--writeup-bg);
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 1px;
   padding-bottom: 1px;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: auto;
+  margin-bottom: auto;
 
   border-radius: 30px;
+
+  overflow: scroll;
 }
-#info-button {
-  display: none;
+.writeup-header {
+  position: absolute;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: inherit;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: var(--writeup-bg);
+}
+.writeup-body {
+  margin-top: 60px;
+  padding-bottom: 10px;
 }
 
-#toggle-container {
+#info-icon {
   position: absolute;
+  top: var(--edge-padding);
+  right: var(--edge-padding);
+  width: 40px;
+  height: 40px;
+
+  background-image: url('./img/info.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-color: red; */
+}
+#info-icon:hover {
+  cursor: pointer;
+  width: calc(var(--info-button-size) + var(--hover-offset));
+  height: calc(var(--info-button-size) + var(--hover-offset));
+
+  top: calc(var(--edge-padding) - (var(--hover-offset)/2));
+  right: calc(var(--edge-padding) - (var(--hover-offset)/2));
+}
+
+#THE-FOG {
+  background-color: rgba(126, 98, 155, 0.875);
+  position: fixed;
+  top: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+}
+
+.hideDiv {
+  display: none;
+  visibility: hidden;
+}
+
+
+#toggle-container {
+  position: fixed;
   top: 40px;
   left: 20px;
   display: flex;
