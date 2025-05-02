@@ -423,7 +423,9 @@ td {
 
   border-radius: 30px;
 
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width:none;
 }
 .writeup-header {
   position: absolute;
