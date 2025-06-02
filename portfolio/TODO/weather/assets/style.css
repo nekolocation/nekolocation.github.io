@@ -1,0 +1,259 @@
+:root {
+    --sun-color: rgb(253, 245, 175);
+    --moon-color: rgb(220, 219, 223);
+    --sky-color: #8ab1eb;
+    --land-color: #78db96;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--sky-color);
+    transition-duration: 0.5s;
+}
+
+.task-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+main {
+    margin-top: 80px;
+    max-width: 100vw;
+}
+
+#location-info {
+    display: flex;
+    visibility: hidden;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 50px;
+    font-weight: 600;
+    font-style: normal;
+
+    color: #3b006b;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+    -webkit-text-fill-color: #3b006b;
+}
+#city-name {
+    max-width: calc(100vw - 60px);
+    font-size: 70px;
+    font-weight: bold;
+    -webkit-text-stroke-width: 2px;
+    overflow-x: auto;
+}
+#time, #date {
+    font-size: 40px;
+}
+#date {
+    margin-top: 12px;
+}
+#city {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    overflow-x: auto;
+}
+#geolocate {
+    visibility: hidden;
+    height: 50px;
+    width: 50px;
+    margin-left: 10px;
+    /* Only works on a live server 😔 😭 */
+    /* background-color: red;
+    mask-image: url('./img/iconpacks-location-pointer-2961.png');
+    mask-size: cover; */
+    background-image: url('./img/marker_day.png');
+    background-size: 50px;
+    background-repeat: no-repeat;
+}
+#geolocate:hover {
+    cursor: pointer;
+}
+#coordinates-container {
+    display: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 26px;
+    text-align: center; 
+    font-weight: bolder;
+}
+
+#weather-container {
+    visibility: hidden;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly; 
+    margin: 30px auto;
+    margin-top: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+    border-radius: 20px;
+
+    max-width: 1015px;
+    width: 100%;
+
+    background-color: rgba(128, 128, 128, 0.5);
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    transition: margin-top 0.5s ease-in-out;
+}
+
+.weather-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+    width: 80px;
+    height: 120px;
+    font-family: Karla;
+    
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center; 
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+
+    background-repeat: no-repeat;
+    background-position: 0px;
+    font-weight: bold;
+}
+.weather-time {
+    font-size: 20px;
+}
+.weather-conditions {
+    align-self: center;
+}
+
+/* Adjust elements to vertical screen size */
+@media (max-height: 789px) {
+    #weather-container {
+        margin-top: 75px;
+    }
+}
+@media (max-height: 679px) {
+    #weather-container {
+        margin-top: 50px;
+    }
+}
+@media (max-height: 569px) {
+    main {
+        margin-top: 0px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    #weather-container {
+        margin-top: 10px;
+        margin-bottom: 30px;
+        display: flex;
+        flex-grow: 1;
+        max-height: 150px;
+    }
+    #location-info {
+        display: flex;
+        flex-grow: 1;
+        margin: 0;
+    }
+}
+/* Make weather info closer to location info on smaller screens */
+@media (max-width: 1089px) {
+    #weather-container {
+        width: 85vw;
+    }
+}
+
+
+#scene {
+    visibility: hidden;
+    overflow: hidden;
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    height: 100vh;
+    max-width: 100vw;
+    z-index: -1;
+    overflow: hidden;
+
+}
+#celestial-bodies {
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+
+    z-index: -2;
+}
+#sun, #moon {
+    visibility: hidden;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    transition-duration: 10s;
+}
+#sun {
+    background-color: var(--sun-color);
+}
+#moon {
+    background-color: var(--moon-color);
+}
+
+#land-and-sky {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+    z-index: -1;
+    visibility: hidden;
+}
+
+#sky {
+    background-color: #bad2f5;
+    height: 450px; 
+    visibility: hidden;
+    overflow: hidden;
+    z-index: -99;
+}
+
+#horizon {
+    visibility: hidden;
+    height: 40px;
+    width: 100vw;
+    background-color: var(--land-color);
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    padding-bottom: 10px;
+    overflow: hidden;
+}
+/* TODO: make land extend down if the page needs to be scrolled downwards */
+#land {
+    visibility: hidden;
+    background-color: var(--land-color);
+    flex-grow: 1;
+    overflow: hidden;
+}
