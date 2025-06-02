@@ -88,10 +88,10 @@
     </main>
 
     <div id="info-icon" onclick="togglePopup()"></div>
-    <!-- TODO: stop writeup clicks from toggling popup -->
+    <!-- Figured out an easy propagation fix from this blogpost: -->
     <!-- https://kotomi-noguchi.medium.com/javascript-preventing-parent-event-when-child-event-is-triggered-cfc3569f002f -->
     <div id="THE-FOG" class="hideDiv" onclick="togglePopup()">
-      <div id="writeup" class="hideDiv">
+      <div id="writeup" class="hideDiv" onclick="event.stopPropagation()">
         <h3 class="writeup-header">About this project</h3>
         <div class="writeup-body">
           <p>For this project, I tried to invoke the feeling of inputting text in an Animal Crossing interface. The following design choices were made in order to accomplish this:
