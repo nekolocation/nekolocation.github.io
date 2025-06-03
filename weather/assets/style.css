@@ -3,6 +3,10 @@
     --moon-color: rgb(220, 219, 223);
     --sky-color: #8ab1eb;
     --land-color: #78db96;
+
+    --info-color-light: rgba(255, 255, 255, 0.5);
+    --info-color-dark: rgba(128, 128, 128, 0.5);
+    --info-text-color: black;
 }
 
 body {
@@ -37,13 +41,15 @@ main {
     -webkit-text-fill-color: #3b006b;
 }
 #city-name {
+    /* TODO: overflow shrinks text for multi-names (eg: Aylmer, Gatineau) */
     width: fit-content;
     max-width: calc(100vw - 60px);
     font-size: 70px;
+    height: 100px;
     font-weight: bold;
     text-align: center;
     -webkit-text-stroke-width: 2px;
-    overflow-x: auto;
+    overflow-x: scroll;
 }
 #time, #date {
     font-size: 40px;
@@ -78,6 +84,8 @@ main {
 #weather-container {
     visibility: hidden;
 
+    color: var(--info-text-color);
+
     display: flex;
     flex-direction: row;
     justify-content: space-evenly; 
@@ -91,7 +99,7 @@ main {
     max-width: 1015px;
     width: 100%;
 
-    background-color: rgba(128, 128, 128, 0.5);
+    background-color: var(--info-color-dark);
     overflow-x: auto;
     overflow-y: hidden;
 
@@ -111,7 +119,7 @@ main {
     margin-left: 10px;
     margin-right: 10px;
     text-align: center; 
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: var(--info-color-light);
     border-radius: 20px;
 
     background-repeat: no-repeat;
@@ -239,4 +247,38 @@ main {
     background-color: var(--land-color);
     flex-grow: 1;
     overflow: hidden;
+}
+
+
+/* For styling custom user shortcuts */
+/* TODO: colors in :root */
+#shortcuts-container {
+    display: flex;
+    justify-content: center;
+}
+.shortcut-item {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+
+    align-items: center;
+    background-color: var(--info-color-light);
+}
+.shortcut-favicon {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: white;
+    justify-content: center;
+}
+.shortcut-name a {
+    color: var(--info-text-color  );
+    text-decoration: none;
+    margin-top: 10px;
 }
