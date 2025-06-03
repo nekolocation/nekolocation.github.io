@@ -98,16 +98,45 @@
       <!-- TODO: Add custom website routing buttons -->
        <!-- TODO: add hide shortcut functionality -->
         <!-- TODO: add customization for scene colors -->
-      <!-- https://github.com/fransallen/favicone -->
-      <div id="shortcuts-container">
-        <!-- Left blank for dynamic content -->
-        <div class="shortcut-item">
-          <div class="shortcut-favicon">
-            <image src="https://favicone.com/gmail.com"/>
-          </div>
-          <div class="shortcut-name">
-            <a href="https://www.gmail.com">Gmail</a>
-          </div>
+      <!-- Icons via https://github.com/fransallen/favicone -->
+      <div id="shortcuts-wrapper" style="display: flex; justify-content: center;">
+        <div id="shortcuts-container">
+          <a href="https://www.gmail.com" class="shortcut-item">
+            <div class="shortcut-favicon">
+              <img src="https://favicone.com/gmail.com"/>
+            </div>
+            <div class="shortcut-name">
+              Gmail
+            </div>
+          </a>
+          <a href="https://www.youtube.com" class="shortcut-item">
+            <div class="shortcut-favicon">
+              <img src="https://favicone.com/youtube.com"/>
+            </div>
+            <div class="shortcut-name">
+              YouTube
+            </div>
+          </a>
+
+          <a href="https://www.instagram.com" class="shortcut-item">
+            <div class="shortcut-favicon">
+              <img src="https://favicone.com/instagram.com"/>
+            </div>
+            <div class="shortcut-name">
+              Instagram
+            </div>
+          </a>
+          <a href="https://www.reddit.com" class="shortcut-item">
+            <div class="shortcut-favicon">
+              <img src="https://favicone.com/reddit.com"/>
+            </div>
+            <div class="shortcut-name">
+              Reddit
+            </div>
+          </a>
+
+          <!-- TODO: include Add Shortcut div with onclick form popup, form submit with addShortcut() -->
+        </div>
       </div>
 
     </main>
