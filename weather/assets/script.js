@@ -29,7 +29,7 @@ var timeZoneDiff = 0; // Diff in seconds between given timezone and UTC
 const totalDaySeconds = 86400;
 const hourInSeconds = 60 * 60;
 var apiObject = null;
-var tempDegrees = 'Kelvin';
+var tempDegrees = 'Fahrenheit';
 // These are used to lerp colors at sunrise and sunset 
 // and may be changed by the call to the WeatherAPI
 var midnightColor = " #1d1733";
@@ -67,6 +67,7 @@ const clockDiv = document.getElementById('time');
 const geoDiv = document.getElementById('geolocate');
 const landDiv = document.getElementById('land');
 const horizonLandDiv = document.getElementById('horizon');
+const shortcutDiv = document.getElementById('shortcuts-wrapper');
 
 const parameters = new URLSearchParams(window.location.search);
 
@@ -119,6 +120,7 @@ async function callAPI() {
         fadeIn(clockDiv);
         fadeIn(dateDiv);
         fadeIn(geoDiv);
+        fadeIn(shortcutDiv);
         fadeIn(document.getElementById('horizon'), 100);
         fadeIn(document.getElementById('land'), 100);
         fadeIn(document.getElementById('sun'));
@@ -524,13 +526,13 @@ let shortcutIncrementCount = 0; // Global counter to give unique IDs
     I originally wrote it kinda spaghetti and had an llm format it more sensibly
 */
 function addShortcut(shortName, shortURL, faviconNum = 0) {
-    // Create anchor element
+    // create parent div element
     const shortcutLink = document.createElement("a");
     shortcutLink.href = shortURL;
     shortcutLink.className = "shortcut-item";
     shortcutLink.id = `shortcut-${shortcutIncrementCount++}`; // TODO: save to local storage too
 
-    // Create favicon container
+    // create favicon container (store <img/> inside)
     const faviconDiv = document.createElement("div");
     faviconDiv.className = "shortcut-favicon";
 
@@ -538,7 +540,7 @@ function addShortcut(shortName, shortURL, faviconNum = 0) {
     if (faviconNum == 0) {
         faviconImg.src = `https://favicone.com/${new URL(shortURL).hostname}`;
     }
-    // TODO: else, find one from list of custom site icons 
+    // TODO: else, use one from list of custom site icons 
     faviconImg.alt = `${shortName} favicon`;
 
     faviconDiv.appendChild(faviconImg);

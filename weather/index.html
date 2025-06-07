@@ -30,20 +30,69 @@
     </div>
 
     <main>
-      <div id="location-info">
-        <div id="city">
-          <!-- TODO: make city name shrink to fit -->
-          <div id="city-name" title="Detected city">[fetching city...]</div>
-          <div id="geolocate" onclick="getLocation()" title="Update location"></div>
-          <!-- TODO: Add history button  -->
-           <!-- TODO: Add city name manual override -->
+      <!-- for holding time info & shortcuts -->
+      <div id="row1" stye>
+        <div id="location-info">
+          <div id="date">Jan 1 1970</div>
+          <!-- TODO: hide seconds, show on hover? -->
+          <div id="time">00:00:00</div>
+          <div id="city">
+            <!-- TODO: make city name shrink to fit -->
+            <div id="city-name" title="Detected city">[fetching city...]</div>
+            <div id="geolocate" onclick="getLocation()" title="Update location"></div>
+            <!-- TODO: Add history button  -->
+             <!-- TODO: Add city name manual override -->
+          </div>
         </div>
-        <!-- TODO: remove coordinates -->
-        <div id="date">Jan 1 1970</div>
-        <div id="time">00:00:00</div>
+
+              <!-- TODO: Add custom website routing buttons -->
+       <!-- TODO: add hide shortcut functionality -->
+        <!-- TODO: add customization for scene colors -->
+      <!-- Icons via https://github.com/fransallen/favicone -->
+      <div id="shortcuts-wrapper">
+        <div id="shortcuts-container">
+          <a href="https://www.gmail.com" class="shortcut-item">
+            <div class="shortcut-favicon">
+              <img src="https://favicone.com/gmail.com"/>
+            </div>
+            <div class="shortcut-name">
+              Gmail
+            </div>
+          </a>
+          <a href="https://www.youtube.com" class="shortcut-item">
+            <div class="shortcut-favicon">
+              <img src="https://favicone.com/youtube.com"/>
+            </div>
+            <div class="shortcut-name">
+              YouTube
+            </div>
+          </a>
+
+          <a href="https://www.instagram.com" class="shortcut-item">
+            <div class="shortcut-favicon">
+              <img src="https://favicone.com/instagram.com"/>
+            </div>
+            <div class="shortcut-name">
+              Instagram
+            </div>
+          </a>
+          <a href="https://www.reddit.com" class="shortcut-item">
+            <div class="shortcut-favicon">
+              <img src="https://favicone.com/reddit.com"/>
+            </div>
+            <div class="shortcut-name">
+              Reddit
+            </div>
+          </a>
+
+          <!-- TODO: include Add Shortcut div with onclick form popup, form submit with addShortcut() -->
+        </div>
+      </div>
+
       </div>
 
       <!-- TODO: add left/right scroll arrow on box being cut off? or custom bottom scroll -->
+       <!-- TODO: "show more" button with more hourly info? -->
       <div id="weather-container">
         <div class="weather-info" id="weather-0">
           <span id="weather-time-0" class="weather-time"></span>
@@ -92,50 +141,6 @@
           <img id="weather-conditions-7" class="weather-conditions"/>
           <span id="weather-temp-7" class="weather-temp"></span>
           <span id="weather-wind-7" class="weather-wind"></span>
-        </div>
-      </div>
-
-      <!-- TODO: Add custom website routing buttons -->
-       <!-- TODO: add hide shortcut functionality -->
-        <!-- TODO: add customization for scene colors -->
-      <!-- Icons via https://github.com/fransallen/favicone -->
-      <div id="shortcuts-wrapper" style="display: flex; justify-content: center;">
-        <div id="shortcuts-container">
-          <a href="https://www.gmail.com" class="shortcut-item">
-            <div class="shortcut-favicon">
-              <img src="https://favicone.com/gmail.com"/>
-            </div>
-            <div class="shortcut-name">
-              Gmail
-            </div>
-          </a>
-          <a href="https://www.youtube.com" class="shortcut-item">
-            <div class="shortcut-favicon">
-              <img src="https://favicone.com/youtube.com"/>
-            </div>
-            <div class="shortcut-name">
-              YouTube
-            </div>
-          </a>
-
-          <a href="https://www.instagram.com" class="shortcut-item">
-            <div class="shortcut-favicon">
-              <img src="https://favicone.com/instagram.com"/>
-            </div>
-            <div class="shortcut-name">
-              Instagram
-            </div>
-          </a>
-          <a href="https://www.reddit.com" class="shortcut-item">
-            <div class="shortcut-favicon">
-              <img src="https://favicone.com/reddit.com"/>
-            </div>
-            <div class="shortcut-name">
-              Reddit
-            </div>
-          </a>
-
-          <!-- TODO: include Add Shortcut div with onclick form popup, form submit with addShortcut() -->
         </div>
       </div>
 
