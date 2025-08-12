@@ -1,3 +1,15 @@
+/* TODO: 
+- improve consistency between left and right buttons
+  - button enlargenation on hover
+  - distance from edge made consistent
+  - round edges of info div 
+  - considering making them a consistent size
+- diff sizes for calc on diff screen sizes?
+  - 730px-???px: Medium (curr standard)
+  - 300px-729px: Small
+*/
+
+
 /* Calculator Style Sheet */
 :root {
   --cat-main_color: #EBC77E;
@@ -57,6 +69,7 @@ h1 {
   text-shadow: -2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white, 2px 2px 0 white;
 
   justify-content: center;
+  text-align: center;
   padding-bottom: 30px;
 }
 #page-title {
@@ -82,7 +95,7 @@ h1 {
   }
 }
 
-/* container to hold calculator & help with resizing! */
+/* container to hold calculator & help with resizing */
 #box {
   /* background-color: rebeccapurple; */
   

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Sunset Weather</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/cloud-icon.png" id="favicon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/style.css">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
+  <body>
+    <!-- TODO: manual time control buttons -->
+     <!-- TODO: custom reorganization of info modules? -->
+    
+    <div id="scene">
+      <div id="celestial-bodies">
+        <div id="sun"></div>
+        <div id="moon"></div>
+      </div>
+      <div id="land-and-sky">
+        <div id="sky"></div>
+        <div id="horizon"></div>
+        <div id="land"></div>
+      </div>
+    </div>
+
+    <main>
+      <div id="location-info">
+        <div id="city">
+          <!-- TODO: make city name shrink to fit -->
+          <div id="city-name" title="Detected city">[fetching city...]</div>
+          <div id="geolocate" onclick="getLocation()" title="Update location"></div>
+          <!-- TODO: Add history button  -->
+           <!-- TODO: Add city name manual override -->
+        </div>
+        <!-- TODO: remove coordinates -->
+        <div id="date">Jan 1 1970</div>
+        <div id="time">00:00:00</div>
+      </div>
+
+      <!-- TODO: add left/right scroll arrow on box being cut off? or custom bottom scroll -->
+      <div id="weather-container">
+        <div class="weather-info" id="weather-0">
+          <span id="weather-time-0" class="weather-time"></span>
+          <img id="weather-conditions-0" class="weather-conditions"/>
+          <span id="weather-temp-0" class="weather-temp"></span>
+          <span id="weather-wind-0" class="weather-wind"></span>
+        </div>
+        <div class="weather-info" id="weather-1">
+          <span id="weather-time-1" class="weather-time"></span>
+          <img id="weather-conditions-1" class="weather-conditions"/>
+          <span id="weather-temp-1" class="weather-temp"></span>
+          <span id="weather-wind-1" class="weather-wind"></span>
+        </div>
+        <div class="weather-info" id="weather-2">
+          <span id="weather-time-2" class="weather-time"></span>
+          <img id="weather-conditions-2" class="weather-conditions"/>
+          <span id="weather-temp-2" class="weather-temp"></span>
+          <span id="weather-wind-2" class="weather-wind"></span>
+        </div>
+        <div class="weather-info" id="weather-3">
+          <span id="weather-time-3" class="weather-time"></span>
+          <img id="weather-conditions-3" class="weather-conditions"/>
+          <span id="weather-temp-3" class="weather-temp"></span>
+          <span id="weather-wind-3" class="weather-wind"></span>
+        </div>
+        <div class="weather-info" id="weather-4">
+          <span id="weather-time-4" class="weather-time"></span>
+          <img id="weather-conditions-4" class="weather-conditions"/>
+          <span id="weather-temp-4" class="weather-temp"></span>
+          <span id="weather-wind-4" class="weather-wind"></span>
+        </div>
+        <div class="weather-info" id="weather-5">
+          <span id="weather-time-5" class="weather-time"></span>
+          <img id="weather-conditions-5" class="weather-conditions"/>
+          <span id="weather-temp-5" class="weather-temp"></span>
+          <span id="weather-wind-5" class="weather-wind"></span>
+        </div>
+        <div class="weather-info" id="weather-6">
+          <span id="weather-time-6" class="weather-time"></span>
+          <img id="weather-conditions-6" class="weather-conditions"/>
+          <span id="weather-temp-6" class="weather-temp"></span>
+          <span id="weather-wind-6" class="weather-wind"></span>
+        </div>
+        <div class="weather-info" id="weather-7">
+          <span id="weather-time-7" class="weather-time"></span>
+          <img id="weather-conditions-7" class="weather-conditions"/>
+          <span id="weather-temp-7" class="weather-temp"></span>
+          <span id="weather-wind-7" class="weather-wind"></span>
+        </div>
+      </div>
+
+      <!-- TODO: Add custom website routing buttons -->
+       <!-- TODO: add hide shortcut functionality -->
+        <!-- TODO: add customization for scene colors -->
+      <!-- Icons via https://github.com/fransallen/favicone -->
+      <div id="shortcuts-wrapper" style="display: flex; justify-content: center;">
+        <div id="shortcuts-container">
+          <a href="https://www.gmail.com" class="shortcut-item">
+            <div class="shortcut-favicon">
+              <img src="https://favicone.com/gmail.com"/>
+            </div>
+            <div class="shortcut-name">
+              Gmail
+            </div>
+          </a>
+          <a href="https://www.youtube.com" class="shortcut-item">
+            <div class="shortcut-favicon">
+              <img src="https://favicone.com/youtube.com"/>
+            </div>
+            <div class="shortcut-name">
+              YouTube
+            </div>
+          </a>
+
+          <a href="https://www.instagram.com" class="shortcut-item">
+            <div class="shortcut-favicon">
+              <img src="https://favicone.com/instagram.com"/>
+            </div>
+            <div class="shortcut-name">
+              Instagram
+            </div>
+          </a>
+          <a href="https://www.reddit.com" class="shortcut-item">
+            <div class="shortcut-favicon">
+              <img src="https://favicone.com/reddit.com"/>
+            </div>
+            <div class="shortcut-name">
+              Reddit
+            </div>
+          </a>
+
+          <!-- TODO: include Add Shortcut div with onclick form popup, form submit with addShortcut() -->
+        </div>
+      </div>
+
+    </main>
+      
+    </div>
+
+    <script src="assets/script.js" type="text/javascript"></script>
+  </body>
+</html>

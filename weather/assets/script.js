@@ -1,7 +1,17 @@
+/* TODO:
+- Improve fade-in of celestial bodies
+- Refactor load of previously-stored location, to pop up before the default if possible
+- Find other ways of scraping less-acurate location info?
+- Dynamic sunset/sunrise (according to local sunrise/sunset)
+- Have preview times show 12am instead of 0AM
+- Allow user to toggle btwn C/F/K
+- Allow use to toggle btwn 12H and 24H
+*/
+
 const debug = false;
 
 const weatherURL = "https://api.openweathermap.org/data/2.5/forecast";
-const apiKey = "680bec9f777232707fe5990b0847c279";
+const apiKey = atob("NjgwYmVjOWY3NzcyMzI3MDdmZTU5OTBiMDg0N2MyNzk=");
 let lat = 34.98722;
 let lon = 135.74250;
 
@@ -69,7 +79,6 @@ function getLocation(fetchAPI = true) {
     navigator.geolocation.getCurrentPosition(function (pos) {
       lat = pos.coords.latitude;
       lon = pos.coords.longitude;
-      document.getElementById('coordinates-container').innerHTML = `${lat}, ${lon}`;
     //   document.getElementById('latitude').innerHTML = `Lat: ${lat}`;
     //   document.getElementById('longitude').innerHTML = `Lon: ${lon}`;
       if (debug){
@@ -110,7 +119,6 @@ async function callAPI() {
         fadeIn(clockDiv);
         fadeIn(dateDiv);
         fadeIn(geoDiv);
-        fadeIn(document.getElementById('coordinates-container'));
         fadeIn(document.getElementById('horizon'), 100);
         fadeIn(document.getElementById('land'), 100);
         fadeIn(document.getElementById('sun'));
@@ -489,14 +497,71 @@ function rgbToHex(r, g, b) {
     return `#${r}${g}${b}`.toUpperCase();
 }
 
-function doxUser() {
-    return "jk";
-}
 
 callAPI();
 getLocation();
 timeUpdate();
-doxUser();
+
+
+// Custom shortcuts shit
+// TODO: save/load increment count & shortcut info from localstorage
+let shortcutIncrementCount = 0; // Global counter to give unique IDs
+
+
+
+/*
+    The following functions create a div that looks like this:
+    
+    <a href={shortURL} class="shortcut-item" id={shortcutIncrementCount}>
+        <div class="shortcut-favicon">
+            <img src="https://favicone.com/gmail.com" alt={shortName + " favicon"}/>
+        </div>
+        <div class="shortcut-name">
+            {shortName}
+        </div>
+    </a>
+
+    I originally wrote it kinda spaghetti and had an llm format it more sensibly
+*/
+function addShortcut(shortName, shortURL, faviconNum = 0) {
+    // Create anchor element
+    const shortcutLink = document.createElement("a");
+    shortcutLink.href = shortURL;
+    shortcutLink.className = "shortcut-item";
+    shortcutLink.id = `shortcut-${shortcutIncrementCount++}`; // TODO: save to local storage too
+
+    // Create favicon container
+    const faviconDiv = document.createElement("div");
+    faviconDiv.className = "shortcut-favicon";
+
+    const faviconImg = document.createElement("img");
+    if (faviconNum == 0) {
+        faviconImg.src = `https://favicone.com/${new URL(shortURL).hostname}`;
+    }
+    // TODO: else, find one from list of custom site icons 
+    faviconImg.alt = `${shortName} favicon`;
+
+    faviconDiv.appendChild(faviconImg);
+
+    // Create name container
+    const nameDiv = document.createElement("div");
+    nameDiv.className = "shortcut-name";
+    nameDiv.textContent = shortName;
+
+    // Append children to anchor
+    shortcutLink.appendChild(faviconDiv);
+    shortcutLink.appendChild(nameDiv);
+
+    // Append anchor to shortcuts container
+    const container = document.getElementById("shortcuts-container");
+    if (container) {
+        container.appendChild(shortcutLink);
+    } else {
+        console.warn("No element with id 'shortcuts-container' found.");
+    }
+}
+
+
 
 console.log(
     `Available functions:\n

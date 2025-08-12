@@ -3,6 +3,10 @@
     --moon-color: rgb(220, 219, 223);
     --sky-color: #8ab1eb;
     --land-color: #78db96;
+
+    --info-color-light: rgba(255, 255, 255, 0.5);
+    --info-color-dark: rgba(128, 128, 128, 0.5);
+    --info-text-color: black;
 }
 
 body {
@@ -11,18 +15,6 @@ body {
     padding: 0;
     background-color: var(--sky-color);
     transition-duration: 0.5s;
-}
-
-.task-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 16px;
-}
-
-.task-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 16px;
 }
 
 main {
@@ -49,11 +41,15 @@ main {
     -webkit-text-fill-color: #3b006b;
 }
 #city-name {
+    /* TODO: overflow shrinks text for multi-names (eg: Aylmer, Gatineau) */
+    width: fit-content;
     max-width: calc(100vw - 60px);
     font-size: 70px;
+    /* height: 100px; */
     font-weight: bold;
+    text-align: right;
     -webkit-text-stroke-width: 2px;
-    overflow-x: auto;
+    overflow: scroll;
 }
 #time, #date {
     font-size: 40px;
@@ -84,16 +80,11 @@ main {
 #geolocate:hover {
     cursor: pointer;
 }
-#coordinates-container {
-    display: none;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 26px;
-    text-align: center; 
-    font-weight: bolder;
-}
 
 #weather-container {
     visibility: hidden;
+
+    color: var(--info-text-color);
 
     display: flex;
     flex-direction: row;
@@ -108,7 +99,7 @@ main {
     max-width: 1015px;
     width: 100%;
 
-    background-color: rgba(128, 128, 128, 0.5);
+    background-color: var(--info-color-dark);
     overflow-x: auto;
     overflow-y: hidden;
 
@@ -122,18 +113,19 @@ main {
     
     width: 80px;
     height: 120px;
+
     font-family: Karla;
+    text-align: center; 
+    font-weight: bold;
     
     padding: 10px;
     margin-left: 10px;
     margin-right: 10px;
-    text-align: center; 
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: var(--info-color-light);
     border-radius: 20px;
 
     background-repeat: no-repeat;
     background-position: 0px;
-    font-weight: bold;
 }
 .weather-time {
     font-size: 20px;
@@ -182,10 +174,11 @@ main {
 }
 
 
+/* TODO: consider making scene scroll, grass to fill until end */
 #scene {
     visibility: hidden;
     overflow: hidden;
-    position: absolute;
+    position: fixed;
 
     top: 0;
     left: 0;
@@ -256,4 +249,58 @@ main {
     background-color: var(--land-color);
     flex-grow: 1;
     overflow: hidden;
+}
+
+
+/* For styling custom user shortcuts */
+/* TODO: fix the fucky wrapping */
+#shortcuts-container {
+    /* display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, max-content));
+    gap: 18px;
+    max-width: 100%;
+
+    height: fit-content;
+
+    padding-left: 30px;
+    padding-right: 30px;
+    
+    font-family: Karla;
+    text-align: center; 
+    font-weight: bold;
+}
+#shortcuts-container a {
+    text-decoration: none;
+    color: var(--info-text-color);
+}
+.shortcut-item {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    /* margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 16px; */
+    
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+
+    align-items: center;
+    background-color: var(--info-color-light);
+}
+.shortcut-favicon {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: white;
+    justify-content: center;
+}
+.shortcut-name {
+    margin-top: 8px;
 }
