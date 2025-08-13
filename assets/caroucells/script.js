@@ -1,7 +1,7 @@
 // this shit is from chatgpt atm
 document.addEventListener("DOMContentLoaded", () => {
     const input = document.getElementById("folder-select-input");
-    const imageContainer = document.getElementById("imageContainer");
+    const fileList = document.getElementById("file-list");
 
     input.addEventListener("change", handleFolderSelect);
 
@@ -18,16 +18,21 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // Clear previous images
-        imageContainer.innerHTML = "";
+        fileList.innerHTML = "";
+
+        // Show section header 
+        document.getElementById("imported-files-header").style.display = "block";
 
         // Display each image
-        imageFiles.forEach(file => {
+       imageFiles.forEach(file => {
             const url = URL.createObjectURL(file);
 
-            const wrapper = document.createElement("li");
-            // wrapper.style.marginBottom = "10px";
+            const li = document.createElement("li");
+
+            const wrapper = document.createElement("div"); // new wrapper inside <li>
             wrapper.style.display = "flex";
             wrapper.style.flexDirection = "row";
+            wrapper.style.alignItems = "center";
 
             const img = document.createElement("img");
             img.src = url;
@@ -37,16 +42,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const label = document.createElement("span");
             label.textContent = file.name;
-            label.style.display = "block";
             label.style.fontSize = "14px";
-            label.style.marginTop = "4px";
             label.style.marginLeft = "8px";
 
             wrapper.appendChild(img);
             wrapper.appendChild(label);
-            imageContainer.appendChild(wrapper);
+            li.appendChild(wrapper);
+            fileList.appendChild(li);
             // todo: hover over thumbnail and see popup with full size? idk
         });
+
     }
 
     // wtf is this lmao
