@@ -1,0 +1,97 @@
+:root {
+    --primary-color: #d7b4f9;
+    --secondary-color: #d6f9b4;
+    --tertiary-color: #f9f9b4;
+    --quartenary-color: #bbd3ea;
+    --accent-color: #f9b4d6;
+    /* yoinked from https://www.color-hex.com/color-palette/9781 */
+
+    /* --link-color: 
+    --hover-color:
+    --success-color:
+    --error-color: 
+    --disabled-color: me;*/
+}
+
+html {
+    background-color: #e6e6fa;
+}
+
+html, body {
+    font-family: Karla;
+    margin: 0;
+}
+
+header {
+    text-align: center;
+}
+h1 {
+    font-size: xxx-large;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.header-description {
+    font-style: italic;
+}
+
+.input-flex-row {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-around; 
+    /* align-items: ;
+    justify-items: center; */
+}
+
+fieldset {
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.session-length-input-wrapper {
+    display: flex;
+    width: fit-content;
+
+    background-color: white;
+    
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    
+    border-color: var(--primary-color);
+    border-style: solid;
+    border-radius: 10px;
+}
+.session-length-inputs{
+    width: 40px;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+}
+
+#folder-select-input {
+    display: none;
+}
+.folder-button {
+    padding: 8px;
+    
+    background-color: var(--primary-color);
+    border-radius: 8px;
+    border-color: var(--accent-color);
+    border-style: solid;
+    border-width: 3px;
+
+    font-weight: bold;
+    /* justify-self: center;
+    align-self: center; */
+}
+#imageContainer {
+    max-height: 300px;
+    /* min-height: fit-content; */
+    overflow-y: scroll;
+    list-style: armenian;
+}

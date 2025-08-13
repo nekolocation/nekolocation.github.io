@@ -13,6 +13,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Gorditas:wght@400;700&family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
         rel="stylesheet">
+    <link href="./assets/caroucells/styles.css" rel="stylesheet">
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,9 +27,35 @@
 </head>
 
 <body>
-    <button id="openBtn">Open Folder</button>
-    <div id="imageContainer"></div>
-    
+    <header>
+        <h1>CarouCells</h1>
+        <p class="header-description">Create a timed carousel of images for timed drawing studies, presentations, or wtv</p>
+        <p><strong>this shit dont work rn fyi</strong></p>
+    </header>
+    <div class="input-flex-row">
+        <div>
+            <!-- timer settings container  -->
+            <fieldset>
+                <legend>Total Session Length</legend>
+                <div class="session-length-input-wrapper">
+                    <input type="number" id="hours" min="0" placeholder="HH" class="session-length-inputs">
+                    <input type="number" id="minutes" min="0" max="60" placeholder="MM" class="session-length-inputs">
+                    <input type="number" id="seconds" min="0" max="60" placeholder="SS" class="session-length-inputs">
+                </div>
+            </fieldset>
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: center;"> 
+            <!-- input wrapper container -->
+            <input type="file" id="folder-select-input" webkitdirectory multiple>
+            <label for="folder-select-input" class="folder-button"
+                role="button" tabindex="0"> <!-- this is important for making this pseudo-button keyboard-accesible! -->
+                Select Image Folder
+            </label>
+            <!-- TODO: add a ? icon to give details about this input button -->
+        </div>
+    </div>
+    <ol id="imageContainer"></ol>
+
     <script src="./assets/caroucells/script.js"></script>
 </body>
 
