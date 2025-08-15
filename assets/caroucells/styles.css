@@ -89,6 +89,11 @@ fieldset {
     /* justify-self: center;
     align-self: center; */
 }
+.folder-button:hover {
+    /* background-color: TODO; */
+    border-color: var(--tertiary-color); /*placeholder*/
+}
+
 #file-list {
     max-height: 300px;
     /* min-height: fit-content; */

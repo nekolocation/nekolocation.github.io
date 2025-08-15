@@ -49,7 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
             wrapper.appendChild(label);
             li.appendChild(wrapper);
             fileList.appendChild(li);
-            // todo: hover over thumbnail and see popup with full size? idk
+            // todo (low): hover over thumbnail and see popup with full size? idk
+            // todo (HIGH): feedback when no images found in folder
+            // todo (MED): spinner while loading? 
         });
 
     }
