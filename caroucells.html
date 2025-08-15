@@ -33,11 +33,13 @@
         <p><strong>this shit dont work rn fyi</strong></p>
     </header>
     <div class="input-flex-row">
-        <div>
-            <!-- timer settings container  -->
+        <div id="input-timers">
+            <h2>Input Timers</h2>
             <fieldset>
                 <legend>Total Session Length</legend>
                 <div class="session-length-input-wrapper">
+                    <!-- TODO: make placeholder align right (fix border edging claustrophobia) -->
+                    <!-- TODO: make input num 9 -> 09 (preceding num)? -->
                     <input type="number" id="hours" min="0" placeholder="HH" class="session-length-inputs">
                     <input type="number" id="minutes" min="0" max="60" placeholder="MM" class="session-length-inputs">
                     <input type="number" id="seconds" min="0" max="60" placeholder="SS" class="session-length-inputs">
@@ -45,6 +47,7 @@
             </fieldset>
         </div>
         <div style="display: flex; flex-direction: column; justify-content: center;"> 
+            <h2>Folder Upload</h2>
             <!-- input wrapper container -->
             <input type="file" id="folder-select-input" webkitdirectory multiple>
             <label for="folder-select-input" class="folder-button"
