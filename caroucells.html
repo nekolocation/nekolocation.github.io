@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CarouCells</title>
+    <!-- <link rel="icon" type="image/x-icon" href="FAVICON_HREF"> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gorditas:wght@400;700&family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
+    <link href="./assets/caroucells/styles.css" rel="stylesheet">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="theme-color" content="#d7b4f9" />
+    <!-- Open Graph metadata -->
+    <meta property="og:title" content="CarouCells" />
+    <meta property="og:description" content="Ref images go wheeeeee"/>
+    <meta property="og:url" content="https://nekolocation.github.io/caroucells" />
+    <!-- <meta property="og:image" content="IMG_URL" />  -->
+</head>
+
+<body>
+    <header>
+        <h1>CarouCells</h1>
+        <p class="header-description">Create a timed carousel of images for timed drawing studies, presentations, or wtv</p>
+        <p><strong>this shit dont work rn fyi</strong></p>
+    </header>
+    <div class="input-flex-row">
+        <div id="input-timers">
+            <h2>Input Timers</h2>
+            <fieldset>
+                <legend>Total Session Length</legend>
+                <div class="session-length-input-wrapper">
+                    <!-- TODO: make placeholder align right (fix border edging claustrophobia) -->
+                    <!-- TODO: make input num 9 -> 09 (preceding num)? -->
+                    <input type="number" id="total-hours" min="0" placeholder="HH" class="session-length-inputs">
+                    <input type="number" id="total-minutes" min="0" max="60" placeholder="MM" class="session-length-inputs">
+                    <input type="number" id="total-seconds" min="0" max="60" placeholder="SS" class="session-length-inputs">
+                </div>
+            </fieldset>
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: center;"> 
+            <h2>Folder Upload</h2>
+            <!-- input wrapper container -->
+            <input type="file" id="folder-select-input" webkitdirectory multiple>
+            <label for="folder-select-input" class="folder-button"
+                role="button" tabindex="0"> <!-- this is important for making this pseudo-button keyboard-accesible! -->
+                Select Image Folder
+            </label>
+            <!-- TODO: add a ? icon to give details about this input button -->
+        </div>
+    </div>
+    <div id="file-view">
+        <h2 id="imported-files-header">Imported Files</h2>
+        <ol id="file-list">
+        </ol>
+    </div>
+
+    <script src="./assets/caroucells/script.js"></script>
+</body>
+
+</html>
