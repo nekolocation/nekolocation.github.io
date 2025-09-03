@@ -287,6 +287,7 @@ main {
     display: flex; 
     justify-content: center;
     flex-grow: 0.6;
+    align-items: center;
 
     overflow: scroll;
 }
@@ -296,16 +297,17 @@ main {
     justify-content: flex-start;
     flex-wrap: wrap; */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, max-content));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     gap: 18px;
-    max-width: 100%;
+    /* max-width: 100%; */
 
     width: 100%;
     height: fit-content;
     overflow: scroll;
 
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 0 10px;
+    /* padding-left: 10px;
+    padding-right: 10px; */
     
     font-family: Karla;
     text-align: center; 
