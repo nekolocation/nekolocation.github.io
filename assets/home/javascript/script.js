@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const rotationAngle = angleDegrees;
 
-            // 6. --- FIX FOR ANIMATION ---
+            // --- FIX FOR ANIMATION ---
             // The CSS animation rotates the element *and then* translates it. This moves
             // the element in its own rotated coordinate system, not the screen's.
             // To fix this, we must "un-rotate" the translation vector before passing it to CSS.
@@ -144,12 +144,16 @@ document.addEventListener('DOMContentLoaded', () => {
         fish.style.setProperty('--end-y-pos', `${endY_var}px`);
         fish.style.setProperty('--rotation-angle', `${rotationAngle}deg`);
 
-        // pondContainer.appendChild(path);
         pondContainer.appendChild(fish);
 
         fish.addEventListener('animationend', () => {
-            fish.remove();
-            // path.remove();
+            // fade out da fish
+            fish.classList.add('fading-out');
+            
+            // Remove the fish from the DOM after the fade-out animation completes
+            setTimeout(() => {
+                fish.remove();
+            }, 1000); // This duration must match the CSS transition time
         });
     }
 
@@ -168,11 +172,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleResize() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
-            document.querySelectorAll('.fish, div[style*="background-color"]').forEach(el => el.remove());
-            initPond();
+            // Existing fish will continue their animation. 
+            // We just update the dimensions for new fish.
+            updatePondDimensions();
         }, 250);
     }
 
     initPond();
     window.addEventListener('resize', handleResize);
 });
+

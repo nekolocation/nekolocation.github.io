@@ -135,10 +135,16 @@ main {
     transform: translate(-100%, -100%); 
     
     animation-name: fish-swim;
+
+    opacity: 1; /* Start fully visible */
+    transition: opacity 1s linear; 
 }
 .fish-animation {
     animation-timing-function: linear; 
     animation-fill-mode: forwards; 
+}
+.fish.fading-out {
+    opacity: 0;
 }
 
 @keyframes fish-swim {
