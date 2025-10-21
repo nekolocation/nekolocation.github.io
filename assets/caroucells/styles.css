@@ -20,6 +20,9 @@ html {
 html, body {
     font-family: Karla;
     margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
 }
 
 header, h2 {

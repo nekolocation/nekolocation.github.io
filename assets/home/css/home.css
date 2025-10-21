@@ -1,0 +1,161 @@
+html {
+    height: 100%;
+    background-color: #2B0057;
+}
+
+html, body {
+    font-family: Karla;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.body {
+    display: flex;
+    /* flex-direction: row; */
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    /* margin-left: 50%;
+    margin-right: 50%; */
+    /* height: 250px;
+    width: 100%; */
+
+    /* margin-left: 50%;
+    margin-right: auto; */
+}
+
+.body div {
+    height: 250px;
+    width: fit-content;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+.row {
+    display: flex;
+    align-items: center;
+
+    width: auto;
+    height: auto;
+
+    margin-top: 100px;
+}
+
+#construction {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Karla;
+    color: #D0E2FF;
+    text-align: center;
+    font-size: 60px;
+
+    text-shadow:
+        3px 3px 0 #163582,
+        -3px 3px 0 #163582,
+        -3px -3px 0 #163582,
+        3px -3px 0 #163582;    
+}
+
+
+#shigoto {
+    margin-left: 50px;
+    height: 250px;
+    -webkit-animation: rotate 4s linear infinite alternate;
+    -moz-animation: rotate 1s linear infinite alternate;
+    animation: rotate 1s cubic-bezier() infinite alternate;
+}
+@-moz-keyframes rotate { 
+    0%      { -moz-transform: rotate(-5deg); }
+    100%    { -moz-transform: rotate(5deg); } 
+}
+@-webkit-keyframes rotate { 
+    0%      { -webkit-transform: rotate(-5deg); }
+    100%    { -webkit-transform: rotate(5deg); } 
+}
+@keyframes rotate { 
+    0%      { -webkit-transform: rotate(-5deg); 
+                transform:rotate(-5deg);   }
+    100%    { -webkit-transform: rotate(5deg); 
+                transform:rotate(5deg);  } 
+}
+
+
+main {
+    height: fit-content;
+    width: fit-content;
+    z-index: 10;
+}
+
+#pond-container {
+    width: 100vw;   
+    height: 100vh;  
+    background-image: url('../img/seamless rocks.webp');
+    position: absolute; 
+    overflow: hidden; 
+    z-index: -1;
+}
+#water-sheet {
+    background-color: rgba(0, 149, 255, 0.293);
+    position: absolute;
+    width: 100%;   
+    height: 100%;  
+    z-index: 1;
+}
+
+.fish {
+    position: absolute; 
+    width: 300px;
+    height: 300px;
+    /* TODO: support variance for fish size? */
+    
+    left: calc(var(--start-x-pos) - 150px);
+    top: calc(var(--start-y-pos) - 100px);
+    
+    background-image: url('../img/fish1.gif');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    z-index: 0;
+    border-radius: 0;
+    /* setting origin helps ensure rotation is performed properly */
+    transform-origin: center center; 
+    transform: translate(-100%, -100%); 
+    
+    animation-name: fish-swim;
+}
+.fish-animation {
+    animation-timing-function: linear; 
+    animation-fill-mode: forwards; 
+}
+
+@keyframes fish-swim {
+    0% { 
+        transform: rotate(var(--rotation-angle)) translate(0, 0); 
+    }
+    100% { 
+        /* calculate total travel distance via (end - start) */
+        transform: rotate(var(--rotation-angle)) translate(
+            calc(var(--end-x-pos) - var(--start-x-pos)), 
+            calc(var(--end-y-pos) - var(--start-y-pos))
+        );
+    }
+}
+
+/* TODO: */
+.animate-lr { animation-name: move-lr; }
+.animate-tb { animation-name: move-tb; }
+.animate-rl { animation-name: move-rl; } 
+.animate-bt { animation-name: move-bt; }
