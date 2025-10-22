@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let resizeTimer;
 
     /**
-     * Updates viewport dimensions, used on resize
+     * Updates viewport dimensions.
      */
     function updatePondDimensions() {
         POND_WIDTH = window.innerWidth;
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function throwBreadcrumbs(coords) {
-        // --- Gemini: Breadcrumb Particle Effect ---
+        // --- GEMINI: Breadcrumb Particle Effect ---
         const crumbCount = Math.floor(Math.random() * 4) + 2; // 2-5 crumbs
         const crumbsToEat = []; // Array to hold new crumbs
 
@@ -225,6 +225,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const translateX = Math.cos(randomAngle) * randomDistance;
             const translateY = Math.sin(randomAngle) * randomDistance;
 
+            // --- NEW: Variance for floating ---
+            const floatDuration = Math.random() * 1.5 + 1.5; // 1.0s to 1.5s
+            const floatRotation = Math.random() * 50 + 2;     // 2deg to 6deg
+            const floatTranslate = Math.random() * 5 + 3;    // 1px to 3px
+            // --- END: New Variance ---
+
             crumb.style.left = `${coords[0]}px`;
             crumb.style.top = `${coords[1]}px`;
             crumb.style.width = `${size}px`;
@@ -234,12 +240,18 @@ document.addEventListener('DOMContentLoaded', () => {
             crumb.style.setProperty('--tx', `${translateX}px`);
             crumb.style.setProperty('--ty', `${translateY}px`);
 
+            // --- NEW: Set variance properties ---
+            crumb.style.setProperty('--float-duration', `${floatDuration}s`);
+            crumb.style.setProperty('--float-rotate', `${floatRotation}deg`);
+            crumb.style.setProperty('--float-translate', `${floatTranslate}px`);
+            // --- END: New Properties ---
+
             pondContainer.appendChild(crumb);
             crumbsToEat.push(crumb); // Add to our array
         }
         // --- END: Breadcrumb Particle Effect ---
 
-        // now spawn a feesh and pass it the crumbs to eat
+        // Now spawn a fish and pass it the crumbs to eat
         spawnFish(coords, crumbsToEat);
         console.log("Spawning fish through [" + coords[0] + ", " + coords[1] + "]." );
     }
@@ -262,5 +274,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 
 

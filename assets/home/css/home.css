@@ -201,14 +201,16 @@ main {
     border-radius: 50%;
     /* Starts centered on the cursor */
     transform: translate(-50%, -50%); 
-    z-index: 2; /* Above water, above fish (fish is z-index 0) */
+    z-index: 2; 
     
-    /* Calls the "spread" animation */
-    animation: breadcrumb-spread 0.5s ease-out forwards;
-    opacity: 0; /* Start invisible, animation fades it in */
+    /* Calls the "spread" animation, then calls the "float" animation */
+    /* MODIFIED: Use CSS var for float duration */
+    animation: breadcrumb-spread 0.5s ease-out forwards,
+               breadcrumb-float var(--float-duration, 1.2s) ease-in-out 0.5s infinite alternate;
+    opacity: 0; 
 }
 
-/* NEW: Animation for crumbs spreading from click */
+/* Animation for crumbs spreading from click */
 @keyframes breadcrumb-spread {
     0% {
         opacity: 1;
@@ -221,18 +223,30 @@ main {
     }
 }
 
-/* NEW: Class added by JS when fish arrives */
+/* MODIFIED: Animation for crumbs floating with variance */
+@keyframes breadcrumb-float {
+    from {
+        /* This is the 100% state of breadcrumb-spread */
+        /* Use CSS variables with fallbacks */
+        transform: translate(calc(var(--tx) - 50%), calc(var(--ty) - 50%)) scale(1) translateY(0px) rotate(calc(var(--float-rotate, 4deg) * -1));
+    }
+    to {
+        transform: translate(calc(var(--tx) - 50%), calc(var(--ty) - 50%)) scale(1) translateY(var(--float-translate, 2px)) rotate(var(--float-rotate, 4deg));
+    }
+}
+
+
+/* Class added by JS when fish arrives */
 .crumb.eaten {
-    /* Start the "eaten" animation */
+    /* This overrides the other animations */
     animation: breadcrumb-eaten 1s linear forwards;
-    /* Go behind the water/fish */
     z-index: 1; 
 }
 
-/* RENAMED: Animation for being eaten (was breadcrumb-fade) */
+/* Animation for being eaten (was breadcrumb-fade) */
 @keyframes breadcrumb-eaten {
     0% {
-        /* Start from floating spot */
+        /* Start from floating spot - will snap from float, which is fine */
         opacity: 1;
         transform: translate(calc(var(--tx) - 50%), calc(var(--ty) - 50%)) scale(1);
     }
