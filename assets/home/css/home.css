@@ -33,18 +33,10 @@ h1 {
 
 .body {
     display: flex;
-    /* flex-direction: row; */
     align-items: center;
     justify-content: center;
 
     height: 100%;
-    /* margin-left: 50%;
-    margin-right: 50%; */
-    /* height: 250px;
-    width: 100%; */
-
-    /* margin-left: 50%;
-    margin-right: auto; */
 }
 #whole-page-flex {
     width: 100vw;
@@ -65,8 +57,6 @@ h1 {
     align-items: center;
     justify-content: center;
 
-    /* height: 100%;
-    width: 100vw; */
     padding: 0;
     margin: 0;
 }
@@ -74,7 +64,6 @@ h1 {
     display: flex;
     flex-direction: row;
     width: 100%;
-    /* height: 600px; */
     align-items: center;
     justify-content: space-evenly;
 }
@@ -84,7 +73,6 @@ h1 {
 }
 .rock-panel {
     display: flex;
-    /* align-items: center; */
     justify-content: center;
     justify-items:center;
 
@@ -93,8 +81,6 @@ h1 {
     width: 25vw;
     height: 25vw;
     max-height: 80vh;
-    /* width: 350px;
-    height: 350px; */
 
     border-style: outset;
     border-width: 0;
@@ -102,7 +88,6 @@ h1 {
     border-bottom-width: 15px;
 }
 h2 {
-    /* margin-top: 60px; */
     font-size: 40px;
     height: 80px;
     align-content: center;
@@ -159,11 +144,11 @@ main {
 .fish {
     position: absolute; 
     width: 300px;
-    height: 300px;
+    height: 200px;
     /* TODO: support variance for fish size? */
     
-    left: calc(var(--start-x-pos) - 150px);
-    top: calc(var(--start-y-pos) - 100px);
+    left: var(--start-x-pos);
+    top: var(--start-y-pos);
     
     background-image: url('../img/fish1.gif');
     background-size: contain;
@@ -174,11 +159,10 @@ main {
     border-radius: 0;
     /* setting origin helps ensure rotation is performed properly */
     transform-origin: center center; 
-    transform: translate(-100%, -100%); 
     
     animation-name: fish-swim;
 
-    opacity: 1; /* Start fully visible */
+    opacity: 1;
     transition: opacity 1s linear; 
 }
 .fish-animation {
@@ -208,7 +192,7 @@ main {
 .animate-rl { animation-name: move-rl; } 
 .animate-bt { animation-name: move-bt; }
 
-/* --- Breadcrumb Particle Effect --- */
+/* --- Breadcrumb Particle Effect from Gemini --- */
 .crumb {
     position: absolute;
     /* A brownish breadcrumb color */

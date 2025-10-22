@@ -3,7 +3,7 @@ let debug = false;
 // info for page elements 
 const pondContainer = document.getElementById('pond-container');
 const FISH_WIDTH = 300;
-const FISH_HEIGHT = 300;
+const FISH_HEIGHT = 200; 
 
 // randomized time range for each new fish to spawn (in MS)
 let min_spawn_delay = 5000;
@@ -53,12 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (ty2 > 0) t = Math.min(t, ty2);
         }
 
-        // If no intersection is found (unlikely), return a distant point.
+        // If no intersection is found (unlikely), set a large distance.
         if (t === Infinity) {
-            return [cx + vx * 10000, cy + vy * 10000];
+            t = 10000;
         }
 
-        return [cx + t * vx, cy + t * vy];
+        const extension = 600;
+        return [cx + (t + extension) * vx, cy + (t + extension) * vy];
     }
 
 
@@ -114,19 +115,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const edgeStart = findEndpoint(midPoint, inverseAngle);
         const edgeEnd = findEndpoint(midPoint, angleDegrees);
 
-        // once we have those points, we need to extend them outwards to ensure the fish is fully off-screen!
-        // TODO: figure out a better way to do this; Gemini helped me lol 
-        const angleRadians = angleDegrees * (Math.PI / 180);
-        const offsetX = Math.cos(angleRadians) * FISH_WIDTH * 2;
-        const offsetY = Math.sin(angleRadians) * FISH_WIDTH * 2;
-
-        const startX = edgeStart[0] - offsetX;
-        const startY = edgeStart[1] - offsetY;
-        const endX = edgeEnd[0] + offsetX;
-        const endY = edgeEnd[1] + offsetY;
+        const startX = edgeStart[0];
+        const startY = edgeStart[1];
+        const endX = edgeEnd[0];
+        const endY = edgeEnd[1];
         
         const rotationAngle = angleDegrees;
+        const angleRadians = angleDegrees * (Math.PI / 180);
 
+        // TODO: review this stuff that gemini helped with 
             // --- FIX FOR ANIMATION ---
             // The CSS animation rotates the element *and then* translates it. This moves
             // the element in its own rotated coordinate system, not the screen's.
@@ -163,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // fade out da fish
             fish.classList.add('fading-out');
             
-            // Remove da fish from the DOM after the fade-out animation completes
+            // remove da fish from the DOM after the fade-out animation completes
             setTimeout(() => {
                 fish.remove();
             }, 1000); 
@@ -226,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Spawning fish through [" + coords[0] + ", " + coords[1] + "]." );
     }
 
-    initPond();
+    initPond(); 
     window.addEventListener('resize', handleResize);
 
     // to make the page feel more lively and benefit from making the Live Fish Sim (if it's not too insane to call it that)...
@@ -235,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // we actually listen on the body (not the pond), since the pond is in the background (z-index: -1)
         // we check if the click was on one of the foreground elements
         const clickedOnRockPanel = event.target.closest('.rock-panel');
-        const clickedOnHeadContainer = event.target.closest('h1');
+        const clickedOnHeadContainer = event.target.closest('h1'); 
 
         // and if the click was NOT on a foreground element, we spawn a fish!
         if (!clickedOnRockPanel && !clickedOnHeadContainer) {
