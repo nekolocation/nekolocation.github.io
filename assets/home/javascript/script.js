@@ -117,8 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // once we have those points, we need to extend them outwards to ensure the fish is fully off-screen!
         // TODO: figure out a better way to do this; Gemini helped me lol 
         const angleRadians = angleDegrees * (Math.PI / 180);
-        const offsetX = Math.cos(angleRadians) * FISH_WIDTH;
-        const offsetY = Math.sin(angleRadians) * FISH_WIDTH;
+        const offsetX = Math.cos(angleRadians) * FISH_WIDTH * 2;
+        const offsetY = Math.sin(angleRadians) * FISH_WIDTH * 2;
 
         const startX = edgeStart[0] - offsetX;
         const startY = edgeStart[1] - offsetY;
@@ -163,10 +163,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // fade out da fish
             fish.classList.add('fading-out');
             
-            // Remove the fish from the DOM after the fade-out animation completes
+            // Remove da fish from the DOM after the fade-out animation completes
             setTimeout(() => {
                 fish.remove();
-            }, 1000); // This duration must match the CSS transition time
+            }, 1000); 
         });
     }
 
@@ -185,13 +185,34 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleResize() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
-            // Existing fish will continue their animation. 
-            // We just update the dimensions for new fish.
             updatePondDimensions();
         }, 250);
     }
 
+    function throwBreadcrumbs(coords) {
+        // TODO: create visual for breadcrumbs
+            // spawn a cluster of crumbs and then let them spread out and shrink while fading out!
+            // this helps hide that the fish don't always move through the assigned point (not worth fixing lol)
+        // then spawn feesh
+        spawnFish(coords);
+        console.log("Spawning fish through [" +coords[0] + ", " + coords[1] + "]." )
+    }
+
     initPond();
     window.addEventListener('resize', handleResize);
-});
 
+    // to make the page feel more lively and benefit from making the Live Fish Sim (if it's not too insane to call it that)...
+    // we add some functionality! click on the pond to throw some bread crumbs and spawn a feesh!
+    document.body.addEventListener('click', (event) => {
+        // we actually listen on the body (not the pond), since the pond is in the background (z-index: -1)
+        // we check if the click was on one of the foreground elements
+        const clickedOnRockPanel = event.target.closest('.rock-panel');
+        const clickedOnHeadContainer = event.target.closest('h1');
+
+        // and if the click was NOT on a foreground element, we spawn a fish!
+        if (!clickedOnRockPanel && !clickedOnHeadContainer) {
+            // pass the [x, y] coordinates of the click directly to spawnFish, instead of randomizing the location
+            throwBreadcrumbs([event.clientX, event.clientY]);
+        }
+    });
+});
