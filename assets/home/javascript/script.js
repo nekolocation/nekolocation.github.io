@@ -6,8 +6,8 @@ const FISH_WIDTH = 300;
 const FISH_HEIGHT = 300;
 
 // randomized time range for each new fish to spawn (in MS)
-let min_spawn_delay = 500;
-let max_spawn_delay = 10000;
+let min_spawn_delay = 5000;
+let max_spawn_delay = 15000;
 
 document.addEventListener('DOMContentLoaded', () => {
     let POND_WIDTH = window.innerWidth;
@@ -71,7 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const nextDelay = Math.random() * (max_spawn_delay - min_spawn_delay) + min_spawn_delay;
 
         fishSpawnerTimeout = setTimeout(() => {
-            spawnFish();
+            // Only spawn a fish if the tab is currently active and visible.
+            if (!document.hidden) {
+                spawnFish();
+            }
             startRandomSpawning();
         }, nextDelay);
     }
@@ -79,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Creates and animates a single fish element.
      */
-    function spawnFish() {
+    function spawnFish(coords = [-1,-1]) {
         if (POND_WIDTH === 0 || POND_HEIGHT === 0) return;
 
         const fish = document.createElement('div');
@@ -88,10 +91,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const duration = Math.random() * 10 + 5;
         fish.style.animationDuration = `${duration}s`;
 
-        // first, pick a random point within the inner 90% of the canvas (this will be a point the fish passes through)
-        const midX = (Math.random() * 0.90 + 0.05) * POND_WIDTH;
-        const midY = (Math.random() * 0.90 + 0.05) * POND_HEIGHT;
-        const midPoint = [midX, midY];
+        let midX = 0;
+        let midY = 0; 
+
+        if (coords[0] !== -1 || coords[1] !== -1) {
+            // if function passed coords, use it to spawn fish (to pass through "breadcrumbs") 
+            midX = coords[0];
+            midY = coords[1];
+        }
+        else {
+            // if no manual entry, pick a random point within the inner 90% of the canvas (this will be a point the fish passes through)
+            midX = (Math.random() * 0.90 + 0.05) * POND_WIDTH;
+            midY = (Math.random() * 0.90 + 0.05) * POND_HEIGHT;
+        }
+        let midPoint = [midX, midY];
 
         // next, select a random angle for the fish's path, extended from that random point
         const angleDegrees = Math.random() * 360;
