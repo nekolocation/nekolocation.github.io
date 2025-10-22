@@ -207,3 +207,37 @@ main {
 .animate-tb { animation-name: move-tb; }
 .animate-rl { animation-name: move-rl; } 
 .animate-bt { animation-name: move-bt; }
+
+/* --- Breadcrumb Particle Effect --- */
+.crumb {
+    position: absolute;
+    /* A brownish breadcrumb color */
+    background-color: #c1aa74; 
+    border: 1px solid #553217;
+    border-radius: 50%;
+    /* Starts centered on the cursor */
+    transform: translate(-50%, -50%); 
+    z-index: 1; /* Above water, below fish/UI */
+    /* Calls the animation */
+    animation: breadcrumb-fade 2s linear forwards;
+    opacity: 0; /* Start invisible, animation fades it in */
+}
+
+@keyframes breadcrumb-fade {
+    0% {
+        /* Start at center, full size, full opacity */
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        /* Hold opacity for a bit */
+        opacity: 1;
+    }
+    100% {
+        /* Move to the random destination, 
+        shrink to nothing, and fade out 
+        */
+        opacity: 0;
+        transform: translate(calc(var(--tx) - 50%), calc(var(--ty) - 50%)) scale(0);
+    }
+}

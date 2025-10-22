@@ -190,12 +190,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function throwBreadcrumbs(coords) {
-        // TODO: create visual for breadcrumbs
-            // spawn a cluster of crumbs and then let them spread out and shrink while fading out!
-            // this helps hide that the fish don't always move through the assigned point (not worth fixing lol)
+        // --- NEW: Breadcrumb Particle Effect ---
+        const crumbCount = Math.floor(Math.random() * 4) + 2; // 2-5 crumbs
+        for (let i = 0; i < crumbCount; i++) {
+            const crumb = document.createElement('div');
+            crumb.classList.add('crumb');
+
+            const size = Math.floor(Math.random() * 41) + 20; // 20px to 60px
+            const randomAngle = Math.random() * 2 * Math.PI; // Random direction
+            const randomDistance = Math.random() * 60 + 30; // 30px to 90px spread
+
+            const translateX = Math.cos(randomAngle) * randomDistance;
+            const translateY = Math.sin(randomAngle) * randomDistance;
+
+            crumb.style.left = `${coords[0]}px`;
+            crumb.style.top = `${coords[1]}px`;
+            crumb.style.width = `${size}px`;
+            crumb.style.height = `${size}px`;
+
+            // Pass random values to CSS for the animation
+            crumb.style.setProperty('--tx', `${translateX}px`);
+            crumb.style.setProperty('--ty', `${translateY}px`);
+
+            pondContainer.appendChild(crumb);
+
+            // Remove the crumb after its 2-second animation
+            setTimeout(() => {
+                crumb.remove();
+            }, 2000);
+        }
+        // --- END: Breadcrumb Particle Effect ---
+
         // then spawn feesh
         spawnFish(coords);
-        console.log("Spawning fish through [" +coords[0] + ", " + coords[1] + "]." )
+        console.log("Spawning fish through [" + coords[0] + ", " + coords[1] + "]." );
     }
 
     initPond();
@@ -216,3 +244,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
