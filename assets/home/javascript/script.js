@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let resizeTimer;
 
     /**
-     * Updates viewport dimensions.
+     * Updates viewport dimensions, used on resize
      */
     function updatePondDimensions() {
         POND_WIDTH = window.innerWidth;
@@ -82,8 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * Creates and animates a single fish element.
+     * @param {number[]} [coords=[-1,-1]] - The [x,y] point the fish must pass through (defaults to [-1,-1] for random location)
+     * @param {HTMLElement[]} [crumbsToEat=[]] - An array of crumb elements to "eat".
      */
-    function spawnFish(coords = [-1,-1]) {
+    function spawnFish(coords = [-1,-1], crumbsToEat = []) {
         if (POND_WIDTH === 0 || POND_HEIGHT === 0) return;
 
         const fish = document.createElement('div');
@@ -145,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // The end position variable is calculated from the start and the corrected translation.
             const endX_var = startX_var + tx;
-            const endY_var = startY_var + ty;
+        const endY_var = startY_var + ty;
         
         // use corrected CSS variables for the fish animations
         fish.style.setProperty('--start-x-pos', `${startX_var}px`);
@@ -156,11 +158,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
         pondContainer.appendChild(fish);
 
+        // --- Gemini: Logic to "eat" crumbs ---
+        if (crumbsToEat.length > 0) {
+            const totalDistance = Math.hypot(endX - startX, endY - startY);
+            const distanceToMid = Math.hypot(midPoint[0] - startX, midPoint[1] - startY);
+            
+            // Calculate time in milliseconds for fish to reach crumbs
+            const timeToMid_ms = (distanceToMid / totalDistance) * duration * 1000;
+
+            // Wait for the fish to reach the crumbs
+            setTimeout(() => {
+                crumbsToEat.forEach(crumb => {
+                    crumb.classList.add('eaten'); // Trigger "eaten" animation
+                    // Remove from DOM after the "eaten" animation (1s)
+                    setTimeout(() => {
+                        crumb.remove();
+                    }, 1000); 
+                });
+            }, timeToMid_ms);
+        }
+        // --- END: Logic to "eat" crumbs ---
+
         fish.addEventListener('animationend', () => {
             // fade out da fish
             fish.classList.add('fading-out');
             
-            // remove da fish from the DOM after the fade-out animation completes
+            // Remove da fish from the DOM after the fade-out animation completes
             setTimeout(() => {
                 fish.remove();
             }, 1000); 
@@ -187,8 +210,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function throwBreadcrumbs(coords) {
-        // --- NEW: Breadcrumb Particle Effect ---
+        // --- Gemini: Breadcrumb Particle Effect ---
         const crumbCount = Math.floor(Math.random() * 4) + 2; // 2-5 crumbs
+        const crumbsToEat = []; // Array to hold new crumbs
+
         for (let i = 0; i < crumbCount; i++) {
             const crumb = document.createElement('div');
             crumb.classList.add('crumb');
@@ -210,16 +235,12 @@ document.addEventListener('DOMContentLoaded', () => {
             crumb.style.setProperty('--ty', `${translateY}px`);
 
             pondContainer.appendChild(crumb);
-
-            // Remove the crumb after its 2-second animation
-            setTimeout(() => {
-                crumb.remove();
-            }, 2000);
+            crumbsToEat.push(crumb); // Add to our array
         }
         // --- END: Breadcrumb Particle Effect ---
 
-        // then spawn feesh
-        spawnFish(coords);
+        // now spawn a feesh and pass it the crumbs to eat
+        spawnFish(coords, crumbsToEat);
         console.log("Spawning fish through [" + coords[0] + ", " + coords[1] + "]." );
     }
 
@@ -241,4 +262,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 
