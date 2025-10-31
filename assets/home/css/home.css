@@ -201,7 +201,7 @@ main {
     border-radius: 50%;
     /* Starts centered on the cursor */
     transform: translate(-50%, -50%); 
-    z-index: 2; 
+    z-index: 3; 
     
     /* Calls the "spread" animation, then calls the "float" animation */
     /* MODIFIED: Use CSS var for float duration */
@@ -254,6 +254,44 @@ main {
         /* Fade and shrink */
         opacity: 0;
         transform: translate(calc(var(--tx) - 50%), calc(var(--ty) - 50%)) scale(0);
+    }
+}
+
+/* --- NEW: Ripple Effect --- */
+.ripple {
+    position: absolute;
+    /* z-index 2: Above water, below crumbs */
+    z-index: 2; 
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    
+    /* Center it on the click point */
+    transform: translate(-50%, -50%);
+    
+    /* Get size from JS, with a fallback */
+    width: var(--start-size, 45px);
+    height: var(--start-size, 45px);
+    
+    /* Start invisible */
+    opacity: 0; 
+    
+    /* Call the animation, set duration to 2s, and use 'forwards' to hold the end state (opacity 0) */
+    animation: ripple-spread 2s ease-out forwards;
+    
+    /* Make sure it doesn't block clicks */
+    pointer-events: none;
+}
+
+@keyframes ripple-spread {
+    0% {
+        /* Start at 0.7 opacity and defined size */
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        /* End faded out and 5x larger */
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(5);
     }
 }
 

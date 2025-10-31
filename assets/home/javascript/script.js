@@ -231,6 +231,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const floatTranslate = Math.random() * 5 + 3;    // 1px to 3px
             // --- END: New Variance ---
 
+            // --- NEW: Create Ripple Effect ---
+            const ripple = document.createElement('div');
+            ripple.classList.add('ripple');
+
+            // --- MODIFIED: Spawn ripple at crumb's landing spot ---
+            const rippleX = coords[0] + translateX;
+            const rippleY = coords[1] + translateY;
+            ripple.style.left = `${rippleX}px`;
+            ripple.style.top = `${rippleY}px`;
+            // --- END: Modification ---
+
+            // Set initial size based on crumb size (e.g., 1.5x)
+            ripple.style.setProperty('--start-size', `${size * 1.5}px`); 
+            // The ripple animation should start after the crumb spread animation (0.5s)
+            ripple.style.animationDelay = '0.5s';
+            
+            pondContainer.appendChild(ripple);
+
+            // Remove the ripple from the DOM after its animation finishes
+            // 500ms delay + 2000ms animation = 2500ms
+            setTimeout(() => {
+                ripple.remove();
+            }, 2500);
+            // --- END: Ripple Effect ---
+
             crumb.style.left = `${coords[0]}px`;
             crumb.style.top = `${coords[1]}px`;
             crumb.style.width = `${size}px`;
@@ -275,5 +300,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-
+// TODO: fish fed counter
+// TODO: fish variance in spawn
