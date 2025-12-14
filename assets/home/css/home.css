@@ -67,26 +67,37 @@ h1 {
     align-items: center;
     justify-content: space-evenly;
 }
+
 .column {
     display: flex;
     flex-direction: column;
 }
-.rock-panel {
+.lily-pad {
     display: flex;
     justify-content: center;
     justify-items:center;
 
-    background-color: rgb(193, 199, 193);
-    border-radius: 15px;
+    background-image: url('../img/Lily\ Pad.svg');
+    background-size: contain;
     width: 25vw;
     height: 25vw;
     max-height: 80vh;
 
-    border-style: outset;
-    border-width: 0;
-    border-right-width: 15px;
-    border-bottom-width: 15px;
+    /* outline: white solid 20px; */
+    filter: drop-shadow(20px 20px 20px rgb(1, 16, 31));
+    cursor: pointer;
 }
+.lily-pad::before {
+    width: inherit;
+    height: inherit;
+    background-image: url('../img/Lily\ Pad.svg');
+    background-size: contain;
+        outline: white solid 20px;
+}
+.lily-pad:nth-of-type(2)::before {
+    transform: rotate(45deg) scale(1.2); 
+}
+
 h2 {
     font-size: 40px;
     height: 80px;
@@ -128,7 +139,7 @@ main {
 #pond-container {
     width: 100vw;   
     height: 100vh;  
-    background-image: url('../img/seamless rocks.webp');
+    background-image: url('../img/seamless\ rocks\ 2.webp');
     position: absolute; 
     overflow: hidden; 
     z-index: -1;
@@ -150,7 +161,7 @@ main {
     left: var(--start-x-pos);
     top: var(--start-y-pos);
     
-    background-image: url('../img/fish1.gif');
+    background-image: url('../img/translucent_fish.gif');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

@@ -164,9 +164,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const distanceToMid = Math.hypot(midPoint[0] - startX, midPoint[1] - startY);
             
             // Calculate time in milliseconds for fish to reach crumbs
-            const timeToMid_ms = (distanceToMid / totalDistance) * duration * 1000;
+            // The fish's center is FISH_WIDTH / 2 (150px) from its "mouth" (front of the container).
+            // We want the eating to happen 150px *before* the center arrives.
+            const distanceToFront = distanceToMid - (FISH_WIDTH / 2);
 
-            // Wait for the fish to reach the crumbs
+            // Calculate time in milliseconds for fish's FRONT to reach crumbs
+            // Use Math.max to ensure time is not negative (if crumbs are very close to start)
+            const timeToFront_ms = Math.max(0, (distanceToFront / totalDistance) * duration * 1000);
+
+            // Wait for the fish's FRONT to reach the crumbs
             setTimeout(() => {
                 crumbsToEat.forEach(crumb => {
                     crumb.classList.add('eaten'); // Trigger "eaten" animation
@@ -175,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         crumb.remove();
                     }, 1000); 
                 });
-            }, timeToMid_ms);
+            }, timeToFront_ms); // Use the new, earlier time
         }
         // --- END: Logic to "eat" crumbs ---
 
